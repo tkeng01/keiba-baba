@@ -1,0 +1,31 @@
+header {
+  background-color: #8fbc8f;
+}
+
+body {
+  margin: 0;
+}
+#top a {
+  padding: 5px;
+  color: black;
+  display: flex;
+  text-decoration: none;
+}
+
+#top p {
+  margin: 0;
+  position: fixed;
+  top: 14px;
+  left: 55px;
+}
+
+#result {
+  height: 200px;
+  width: 500px;
+  background-color: paleturquoise;
+  border-radius: 15px;
+}
+
+#result > p {
+  padding: 10px;
+}
