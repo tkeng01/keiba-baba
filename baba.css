@@ -19,6 +19,13 @@ body {
   left: 55px;
 }
 
+  input[type="date"]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+  }
+  input[type="date"]::-webkit-clear-button{
+    -webkit-appearance: none;
+  }
+
 #result {
   height: 200px;
   width: 500px;

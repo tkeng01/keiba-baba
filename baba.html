@@ -20,53 +20,51 @@
         <section id="survey">
           <p>検索条件</p>
           <form name="trend">
+            <div id="date">
+              <input type="date" id="dayChoice">
+            </div>
             <div id="location">
               <select name="locationChoice" id="locationChoice">
-                <option id="locationChoice" value="tokyo">東京</option>
-                <option id="locationChoice" value="kyoto">京都</option>
-                <option id="locationChoice" value="hanshin">阪神</option>
-                <option id="locationChoice" value="nakayama">中山</option>
-                <option id="locationChoice" value="sapporo">札幌</option>
-                <option id="locationChoice" value="hakodate">函館</option>
-                <option id="locationChoice" value="fukushima">福島</option>
-                <option id="locationChoice" value="niigata">新潟</option>
-                <option id="locationChoice" value="chukyo">中京</option>
-                <option id="locationChoice" value="kokura">小倉</option>
+                <option value="tokyo">東京</option>
+                <option value="kyoto">京都</option>
+                <option value="hanshin">阪神</option>
+                <option value="nakayama">中山</option>
+                <option value="sapporo">札幌</option>
+                <option value="hakodate">函館</option>
+                <option value="fukushima">福島</option>
+                <option value="niigata">新潟</option>
+                <option value="chukyo">中京</option>
+                <option value="kokura">小倉</option>
               </select>
-            </div>
-            <div id="date">
-              <input type="date">
             </div>
             <div id="field">
-              <select name="fieldChoice" id="fieldChoice">
-                <option id="fieldChoice" value="turf">芝</option>
-                <option id="fieldChoice" value="dirt">ダート</option>
-              </select>
+              <input type="radio" name="fieldChoice" value="turf">芝
+              <input type="radio" name="fieldChoice" value="dirt">ダート
             </div>
             <div id="distance">
               <select name="distanceChoice" id="distanceChoice">
-                <option id="distanceChoice" value="1000">1000m</option>
-                <option id="distanceChoice" value="1150">1150m</option>
-                <option id="distanceChoice" value="1200">1200m</option>
-                <option id="distanceChoice" value="1300">1300m</option>
-                <option id="distanceChoice" value="1400">1400m</option>
-                <option id="distanceChoice" value="1500">1500m</option>
-                <option id="distanceChoice" value="1600">1600m</option>
-                <option id="distanceChoice" value="1700">1700m</option>
-                <option id="distanceChoice" value="1800">1800m</option>
-                <option id="distanceChoice" value="1900">1900m</option>
-                <option id="distanceChoice" value="2000">2000m</option>
-                <option id="distanceChoice" value="2100">2100m</option>
-                <option id="distanceChoice" value="2200">2200m</option>
-                <option id="distanceChoice" value="2300">2300m</option>
-                <option id="distanceChoice" value="2400">2400m</option>
-                <option id="distanceChoice" value="2500">2500m</option>
-                <option id="distanceChoice" value="2600">2600m</option>
-                <option id="distanceChoice" value="2800">2800m</option>
-                <option id="distanceChoice" value="3000">3000m</option>
-                <option id="distanceChoice" value="3200">3200m</option>
-                <option id="distanceChoice" value="3400">3400m</option>
-                <option id="distanceChoice" value="3600">3600m</option>
+                <option value="1000">1000m</option>
+                <option value="1150">1150m</option>
+                <option value="1200">1200m</option>
+                <option value="1300">1300m</option>
+                <option value="1400">1400m</option>
+                <option value="1500">1500m</option>
+                <option value="1600">1600m</option>
+                <option value="1700">1700m</option>
+                <option value="1800">1800m</option>
+                <option value="1900">1900m</option>
+                <option value="2000">2000m</option>
+                <option value="2100">2100m</option>
+                <option value="2200">2200m</option>
+                <option value="2300">2300m</option>
+                <option value="2400">2400m</option>
+                <option value="2500">2500m</option>
+                <option value="2600">2600m</option>
+                <option value="2800">2800m</option>
+                <option value="3000">3000m</option>
+                <option value="3200">3200m</option>
+                <option value="3400">3400m</option>
+                <option value="3600">3600m</option>
               </select>
             </div>
           </form>
@@ -75,7 +73,8 @@
         <section id="display">
           <p>検索結果</p>
           <div id="result">
-            <p>○月✕日の傾向は・・・</p>
+            <p><span id="trendDay"></span><span id="trendField"></span>での傾向は・・・</p>
+            <p id="trendResult"></p>
           </div>
         </section>
       </div>
