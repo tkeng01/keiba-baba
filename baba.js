@@ -1,5 +1,6 @@
 'use strict';
 
+//input入力値取得
 const LOCATION_LENGTH = trend.locationChoice.length;
 const DISTANCE_LENGTH = trend.distanceChoice.length;
 
@@ -22,52 +23,67 @@ document.getElementById('search').addEventListener('click', () => {
   }
 });
 
-// var rank_arr = [a,b,c]
-
-function calc(a,b,c) {
-  let str1 = '';
+//アルファベット変換処理
+function charConv(a, b, c) {
+  let firstChar = '';
+  let secondChar = '';
+  let thirdChar = '';
 
   if (1 <= a && a <= 3) {
-    str1 = 'A';    
+    firstChar = 'A';    
   } else if(4 <= a && a <= 7){
-    str1 = 'B';
+    firstChar = 'B';
   } else if(8 <= a && a <= 12){    
-    str1 = 'C';
+    firstChar = 'C';
   } else if(13 <= a && a <= 16){
-    str1 = 'D';
+    firstChar = 'D';
   } else {
-    str1 = 'E';
+    firstChar = 'E';
   }
 
   if (1 <= b && b <= 3) {
-    str2 = 'A';    
+    secondChar = 'A';    
   } else if(4 <= b && b <= 7){
-    str2 = 'B';
+    secondChar = 'B';
   } else if(8 <= b && b <= 12){    
-    str2 = 'C';
+    secondChar = 'C';
   } else if(13 <= b && b <= 16){
-    str2 = 'D';
+    secondChar = 'D';
   } else {
-    str2 = 'E';
+    secondChar = 'E';
   }
 
   if (1 <= c && c <= 3) {
-    str3 = 'A';    
+    thirdChar = 'A';    
   } else if(4 <= c && c <= 7){
-    str3 = 'B';
+    thirdChar = 'B';
   } else if(8 <= c && c <= 12){    
-    str3 = 'C';
+    thirdChar = 'C';
   } else if(13 <= c && c <= 16){
-    str3 = 'D';
+    thirdChar = 'D';
   } else {
-    str3 = 'E';
+    thirdChar = 'E';
   }
-  console.log(str1 + str2 + str3);
-  // let rank = str1;
-  // return rank;
+
+  //アルファベット順に並び替え
+  let rank = [firstChar, secondChar, thirdChar];
+  rank.sort();
+  return rank[0] + rank[1] +rank[2];
 }
 
-calc(1,4,12);
-calc(7,3,17);
+//人気値合計
+function popSum(a, b, c) {
+  return parseInt(a + b + c);
+}
 
-// console.log(rank);
+//各functionに代入
+function trustJudge(a, b, c){
+  //変換結果＋使用処理
+  console.log(charConv(a, b, c));
+
+  //計算結果＋使用処理
+  console.log(popSum(a, b, c));
+}
+
+//1-3着馬人気を引数に指定
+trustJudge(4,1,14);
