@@ -34,8 +34,29 @@ function charCheck(char) {
 }
 
 //charConv改良前
-console.log(charCheck(charConv(6, 5, 10)));
-
 if(charCheck(charConv(6, 5, 10)) == 'blanchFlow') {
-  console.log('分岐処理');
+  if(charConv(6, 5, 10) == midlarArr[0]) {
+    //BBC処理
+    if(popSum(6, 5, 10) <= 21) {
+      console.log('中荒れ');
+    } else {
+      console.log('大荒れ');
+    }
+  } else if(charConv(6, 5, 10) == midlarArr[4]) {
+    //ACE処理
+    if(popSum(6, 5, 10) <= 30) {
+      console.log('中荒れ');
+    } else {
+      console.log('大荒れ');
+    }
+  } else {
+    //AEE,ABD,ACC処理
+    if(popSum(6, 5, 10) <= 22) {
+      console.log('中荒れ');
+    } else {
+      console.log('大荒れ');
+    }
+  }
+} else {
+  console.log(charCheck(charConv(6, 5, 10)));
 }
