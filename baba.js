@@ -3,44 +3,37 @@
 // --input入力値取得--
 const LOCATION_LENGTH = trend.locationChoice.length;
 const DISTANCE_LENGTH = trend.distanceChoice.length;
-let outputCounter = 0;
 
 //検索ボタン処理
 document.getElementById('search').addEventListener('click', () => {
-  const day = document.getElementById('dayChoice').value;
-  console.log(day);
-  if(day !== false) {
-    document.getElementById('trendDay').textContent =  day;
-  } else {
+  const displayDay = document.getElementById('dayChoice').value;
+  let displayCounter = 0;
+
+  if(displayDay == false) {
     alert('日付を選択してください');
+  } else {
+    displayCounter = displayCounter + 1;
   }
   
+  let displayLocation = '';
   for(let i = 0; i <= LOCATION_LENGTH - 1; i++) {
     if(trend.locationChoice[i].selected == true) {
       if(trend.locationChoice[i].value == 'none') {
-        alert('競馬場を選択してください');
+        alert('開催場を選択してください');
       } else {
-        document.getElementById('trendField').textContent = trend.locationChoice[i].value;
+        displayLocation = trend.locationChoice[i].value;
+        displayCounter = displayCounter + 1;
       }
     }
-  }
-
-  const field = document.trend.fieldChoice.value
-  if(field == false) {
-    alert('芝/ダート選択してください');
   }
   
-  for(let j = 0; j <= DISTANCE_LENGTH -1; j++) {
-    if(trend.distanceChoice[j].selected == true) {
-      if(trend.distanceChoice[j].value == 'none') {
-        alert('距離を選択してください');
-      } else {
-        document.getElementById('trendDistance').textContent = trend.distanceChoice[j].value + 'm' + 'での傾向は・・・';
-      }
-    }
+  if(displayCounter == 2) { 
+    document.getElementById('trendDay').textContent = displayDay;
+    document.getElementById('trendField').textContent = displayLocation;
+  } else {
+    displayCounter = 0;
   }
 });
-// ----------
 
 //アルファベット変換処理
 function charConv(a, b, c) {
@@ -95,10 +88,15 @@ function popSum(a, b, c) {
   return parseInt(a + b + c);
 }
 
-// function spread() {
-  //date+race or
-  //スプレッドシートの値取得
-  //gas関数叩く→1,5,6
-  //配列格納
-  //return 配列
-// }
+function callSpread() {
+  // date+race or
+  // スプレッドシートの値取得
+  // gas関数叩く→1,5,6
+  // 配列格納
+  // return 配列
+  // const res = await fetch('https://script.googleusercontent.com/macros/echo?user_content_key=2lXIa7r1o6yftw8699ccBlGpsCakfyEB_pOGb7Wg0Z_ekcNiv9dk_J-IkE-SWo6tYJ0vgdYmEPWhnAQyNCKLUAqMv-g6ATvvm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnOnPuU-DNnpQZexSiH3fnEVTIeNMKSTfBj4m1K-gs4P_r_ermzAgYtqY7f0POzMpTqV-rV9yhQ38&lib=MLyRgtAJfLXnqDF-I5U33yhgCqzOd43Ir');
+  // const test = await res.json();
+  // console.log(test);
+}
+// callSpread();
+// const spreadsheet = SpreadsheetApp.getActive();
