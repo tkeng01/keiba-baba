@@ -27,6 +27,7 @@ document.getElementById('search').addEventListener('click', () => {
     }
   }
   
+  //2だった場合は文字列出力
   if(displayCounter == 2) { 
     document.getElementById('trendDay').textContent = displayDay;
     document.getElementById('trendField').textContent = displayLocation;
@@ -88,15 +89,17 @@ function popSum(a, b, c) {
   return parseInt(a + b + c);
 }
 
-function callSpread() {
-  // date+race or
-  // スプレッドシートの値取得
-  // gas関数叩く→1,5,6
-  // 配列格納
-  // return 配列
-  // const res = await fetch('https://script.googleusercontent.com/macros/echo?user_content_key=2lXIa7r1o6yftw8699ccBlGpsCakfyEB_pOGb7Wg0Z_ekcNiv9dk_J-IkE-SWo6tYJ0vgdYmEPWhnAQyNCKLUAqMv-g6ATvvm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnOnPuU-DNnpQZexSiH3fnEVTIeNMKSTfBj4m1K-gs4P_r_ermzAgYtqY7f0POzMpTqV-rV9yhQ38&lib=MLyRgtAJfLXnqDF-I5U33yhgCqzOd43Ir');
-  // const test = await res.json();
-  // console.log(test);
-}
+// スプレッドシートの値取得
+// function callSpread() {
+    //人気値取得
+// }
 // callSpread();
-// const spreadsheet = SpreadsheetApp.getActive();
+
+//スプレッドシートの値取得（テスト）
+async function callTest() {
+  const res = await fetch("https://script.google.com/macros/s/AKfycbw9jVHMTWumDtzQ0BObOqLoEUbvWlMm1JUzKDGTbnxiYofugew/exec");
+  const users = await res.json();
+  console.log(users[0].hoge);
+  console.log(users[0].age);
+}
+callTest();
