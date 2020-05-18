@@ -1,18 +1,39 @@
 'use strict';
 
+//本日の日付取得
+const GET_NOW = new Date();
+const GET_YEAR = GET_NOW.getFullYear()
+const GET_MONTH = ('0' + (GET_NOW.getMonth() + 1)).slice(-2);
+const GET_DAY = GET_NOW.getDate()
+const GET_TODAY = `${GET_YEAR}${GET_MONTH}${GET_DAY}`;
+
+console.log(GET_TODAY);
+
 // --input入力値取得--
 const LOCATION_LENGTH = trend.locationChoice.length;
 const DISTANCE_LENGTH = trend.distanceChoice.length;
 
 //検索ボタン処理
 document.getElementById('search').addEventListener('click', () => {
-  const displayDay = document.getElementById('dayChoice').value;
   let displayCounter = 0;
+  
+  let displayDay = document.getElementById('dayChoice').value;
+  let cutDate = '';
 
   if(displayDay == false) {
     alert('日付を選択してください');
   } else {
-    displayCounter = displayCounter + 1;
+    const cutYear = displayDay.substr(0, 4);
+    const cutMonth = displayDay.substr(5, 2);
+    const cutDay = displayDay.substr(8, 2);
+    cutDate = `${cutYear}${cutMonth}${cutDay}`;
+
+    //未来を選んだ処理
+    if(GET_TODAY < cutDate) {
+      alert('未来を選んでいます');
+    } else {
+      displayCounter = displayCounter + 1;
+    }
   }
   
   let displayLocation = '';
