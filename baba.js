@@ -7,8 +7,6 @@ const GET_MONTH = ('0' + (GET_NOW.getMonth() + 1)).slice(-2);
 const GET_DAY = GET_NOW.getDate()
 const GET_TODAY = `${GET_YEAR}${GET_MONTH}${GET_DAY}`;
 
-console.log(GET_TODAY);
-
 // --input入力値取得--
 const LOCATION_LENGTH = trend.locationChoice.length;
 const DISTANCE_LENGTH = trend.distanceChoice.length;
@@ -26,7 +24,7 @@ document.getElementById('search').addEventListener('click', () => {
     const cutYear = displayDay.substr(0, 4);
     const cutMonth = displayDay.substr(5, 2);
     const cutDay = displayDay.substr(8, 2);
-    cutDate = `${cutYear}${cutMonth}${cutDay}`;
+    let cutDate = `${cutYear}${cutMonth}${cutDay}`;
 
     //未来を選んだ処理
     if(GET_TODAY < cutDate) {
@@ -110,17 +108,16 @@ function popSum(a, b, c) {
   return parseInt(a + b + c);
 }
 
-// スプレッドシートの値取得
-// function callSpread() {
-    //人気値取得
-// }
-// callSpread();
-
-//スプレッドシートの値取得（テスト）
-async function callTest() {
-  const res = await fetch("https://script.google.com/macros/s/AKfycbw9jVHMTWumDtzQ0BObOqLoEUbvWlMm1JUzKDGTbnxiYofugew/exec");
-  const users = await res.json();
-  console.log(users[0].hoge);
-  console.log(users[0].age);
+const valueSpread = function() {
+  console.log('callbak!')
 }
-callTest();
+
+//スプレッドシートjson取得
+const callSpread = $.ajax({
+  url: 'https://script.google.com/macros/s/AKfycbw9jVHMTWumDtzQ0BObOqLoEUbvWlMm1JUzKDGTbnxiYofugew/exec',
+  type: 'get',
+});
+
+callSpread.always(valueSpread);
+
+console.log('test');
