@@ -55,59 +55,6 @@ document.getElementById('search').addEventListener('click', () => {
   }
 });
 
-//アルファベット変換処理
-function charConv(a, b, c) {
-  let firstChar = '';
-  let secondChar = '';
-  let thirdChar = '';
-
-  if (1 <= a && a <= 3) {
-    firstChar = 'A';    
-  } else if(4 <= a && a <= 7){
-    firstChar = 'B';
-  } else if(8 <= a && a <= 12){    
-    firstChar = 'C';
-  } else if(13 <= a && a <= 16){
-    firstChar = 'D';
-  } else {
-    firstChar = 'E';
-  }
-
-  if (1 <= b && b <= 3) {
-    secondChar = 'A';    
-  } else if(4 <= b && b <= 7){
-    secondChar = 'B';
-  } else if(8 <= b && b <= 12){    
-    secondChar = 'C';
-  } else if(13 <= b && b <= 16){
-    secondChar = 'D';
-  } else {
-    secondChar = 'E';
-  }
-
-  if (1 <= c && c <= 3) {
-    thirdChar = 'A';    
-  } else if(4 <= c && c <= 7){
-    thirdChar = 'B';
-  } else if(8 <= c && c <= 12){    
-    thirdChar = 'C';
-  } else if(13 <= c && c <= 16){
-    thirdChar = 'D';
-  } else {
-    thirdChar = 'E';
-  }
-
-  //アルファベット順に並び替え
-  let rank = [firstChar, secondChar, thirdChar];
-  rank.sort();
-  return rank[0] + rank[1] + rank[2];
-}
-
-//人気値合計
-function popSum(a, b, c) {
-  return parseInt(a) + parseInt(b) + parseInt(c);
-}
-
 //スプレッドシートjson取得
 function callSpread(arr) {
   const callSpread = new XMLHttpRequest();
@@ -150,6 +97,33 @@ document.getElementById('test').addEventListener('click', () => {
       });
       console.log(charConv(convArg1, convArg2, convArg3));
       console.log(popSum(convArg1, convArg2, convArg3));
+
+      if(charCheck(charConv(convArg1, convArg2, convArg3)) == 'blanchFlow') {
+        if(charConv(convArg1, convArg2, convArg3) == midlarArr[0]) {
+          //BBC処理
+          if(popSum(6, 5, 10) <= 21) {
+            console.log('中荒れ');
+          } else {
+            console.log('大荒れ');
+          }
+        } else if(charConv(convArg1, convArg2, convArg3) == midlarArr[4]) {
+          //ACE処理
+          if(popSum(6, 5, 10) <= 30) {
+            console.log('中荒れ');
+          } else {
+            console.log('大荒れ');
+          }
+        } else {
+          //AEE,ABD,ACC処理
+          if(popSum(6, 5, 10) <= 22) {
+            console.log('中荒れ');
+          } else {
+            console.log('大荒れ');
+          }
+        }
+      } else {
+        console.log(charCheck(charConv(convArg1, convArg2, convArg3)));
+      }
     }
   });
 });
