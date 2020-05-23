@@ -105,19 +105,51 @@ function charConv(a, b, c) {
 
 //人気値合計
 function popSum(a, b, c) {
-  return parseInt(a + b + c);
-}
-
-const valueSpread = function() {
-  console.log('callbak!')
+  return parseInt(a) + parseInt(b) + parseInt(c);
 }
 
 //スプレッドシートjson取得
-const callSpread = $.ajax({
-  url: 'https://script.google.com/macros/s/AKfycbw9jVHMTWumDtzQ0BObOqLoEUbvWlMm1JUzKDGTbnxiYofugew/exec',
-  type: 'get',
+function callSpread(arr) {
+  const callSpread = new XMLHttpRequest();
+  callSpread.open('GET', 'https://script.google.com/macros/s/AKfycbw9jVHMTWumDtzQ0BObOqLoEUbvWlMm1JUzKDGTbnxiYofugew/exec', true);
+  callSpread.responseType = 'json';
+  callSpread.send();
+  callSpread.onload = function() {
+    const popArr = [];
+    for(let j = 0; j <= callSpread.response.length - 1; j++) {
+      popArr.push(callSpread.response[j].pop);
+    }
+   
+    const splitPopArr = [];
+    let k = 0;
+    while(k < popArr.length) {
+      if(k % 3 == 0) {
+        splitPopArr.push(popArr.slice(k, k + 3));  
+      }
+      k ++;
+    }
+    arr(splitPopArr);
+  }
+}
+
+document.getElementById('test').addEventListener('click', () => {
+  callSpread(function (splitPopArr) {
+    let convArg1 = 0;
+    let convArg2 = 0;
+    let convArg3 = 0;
+  
+    for(let arrCount = 0; arrCount <= splitPopArr.length - 1; arrCount++) {
+      splitPopArr[arrCount].forEach((placeValue, index) => {
+        if(index == 0) {
+          convArg1 = placeValue;
+        } else if (index == 1) {
+          convArg2 = placeValue;
+        } else {
+          convArg3 = placeValue;
+        }
+      });
+      console.log(charConv(convArg1, convArg2, convArg3));
+      console.log(popSum(convArg1, convArg2, convArg3));
+    }
+  });
 });
-
-callSpread.always(valueSpread);
-
-console.log('test');
