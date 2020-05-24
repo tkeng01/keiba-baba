@@ -1,9 +1,9 @@
 ■目次
-(A)Google App Script上のスクリプトファイルをローカル環境に持ってくる(pull)
-(B)ローカル環境で編集したスクリプトファイルをGoogle App Scriptにアップする（push）
-(C)Github上のスクリプトファイルをローカル環境に持ってくる(pull)
-(D)ローカル環境で編集したスクリプトファイルをGithubにアップする(push)
-
+・(A)Google App Script上のスクリプトファイルをローカル環境に持ってくる(pull)
+・(B)ローカル環境で編集したスクリプトファイルをGoogle App Scriptにアップする（push）
+・(C)Github上のスクリプトファイルをローカル環境に持ってくる(pull)
+・(D)ローカル環境で編集したスクリプトファイルをGithubにアップする(push)
+・作業の流れ
 
 ■(A)Google App Script上のスクリプトファイルをローカル環境に持ってくる(pull)
 ファイルをpullしたいフォルダに移動した後、下記コマンド実行
@@ -24,6 +24,11 @@ git push origin master
 ■(D)ローカル環境で編集したスクリプトファイルをGithubにアップする(push)
 git pull origin master
 
+■作業の流れ
+・Githubからスクリプトファイルをpull（D）
+・ローカル環境で編集
+・Githubへpush(C)
+・Google App Scriptへpush(B)
 
 ■参考
 ・claspでGASのソースをGit管理
