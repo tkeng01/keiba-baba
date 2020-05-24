@@ -1,5 +1,3 @@
-//pushtest
-
 function ss_create() {
   // ss_from_csvフォルダのURL：https://drive.google.com/drive/u/3/folders/1BFC6bMZm-6SJSAP5EDaafyhKksnn2Y9i
   // ss_from_csvフォルダのID：1BFC6bMZm-6SJSAP5EDaafyhKksnn2Y9i
