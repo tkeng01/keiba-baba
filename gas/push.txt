@@ -1,0 +1,33 @@
+■目次
+(A)Google App Script上のスクリプトファイルをローカル環境に持ってくる(pull)
+(B)ローカル環境で編集したスクリプトファイルをGoogle App Scriptにアップする（push）
+(C)Github上のスクリプトファイルをローカル環境に持ってくる(pull)
+(D)ローカル環境で編集したスクリプトファイルをGithubにアップする(push)
+
+
+■(A)Google App Script上のスクリプトファイルをローカル環境に持ってくる(pull)
+ファイルをpullしたいフォルダに移動した後、下記コマンド実行
+clasp clone <Google App ScriptのスクリプトID>
+
+（例）csv to ssプロジェクト（https://script.google.com/home/projects/1lO30HwzcbVmTFd8FKTRHs3ZEvDCbNU1RxHscFiAkhHKHgFxjIoo65YD1）のスクリプトファイルを持ってくる
+clasp clone 1lO30HwzcbVmTFd8FKTRHs3ZEvDCbNU1RxHscFiAkhHKHgFxjIoo65YD1
+
+■(B)ローカル環境で編集したスクリプトファイルをGoogle App Scriptにアップする（push）
+pushしたいファイルが置いてあるフォルダに移動した後、下記コマンド実行
+clasp push
+
+■(C)Github上のスクリプトファイルをローカル環境に持ってくる(pull)
+git add .
+git commit -m "更新内容（メモ）を記載"
+git push origin master
+
+■(D)ローカル環境で編集したスクリプトファイルをGithubにアップする(push)
+git pull origin master
+
+
+■参考
+・claspでGASのソースをGit管理
+    https://qiita.com/zaki-lknr/items/b4954c222c1c1db92caf
+・【Git入門】サルでも分かるGit入門の前に！Git使い方高速入門編【入門は5分で十分だと思います】
+    https://www.youtube.com/watch?v=i1L3A0SLDyg
+    
