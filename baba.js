@@ -7,6 +7,36 @@ const GET_MONTH = ('0' + (GET_NOW.getMonth() + 1)).slice(-2);
 const GET_DAY = GET_NOW.getDate()
 const GET_TODAY = `${GET_YEAR}${GET_MONTH}${GET_DAY}`;
 
+//スプレッドシートjson取得
+function callSpread(keibaData) {
+  const callSpread = new XMLHttpRequest();
+  callSpread.open('GET', 'https://script.google.com/macros/s/AKfycbw9jVHMTWumDtzQ0BObOqLoEUbvWlMm1JUzKDGTbnxiYofugew/exec', true);
+  callSpread.responseType = 'json';
+  callSpread.send();
+  callSpread.onload = function() {
+    const keibaDataArr = [];
+    for(let j = 0; j <= callSpread.response.length - 1; j++) {
+      const KEIBA_YEAR = callSpread.response[j].year;
+      const KEIBA_MONTH = ('0' + callSpread.response[j].month).slice(-2);
+      const KEIBA_DAY = ('0' + callSpread.response[j].day).slice(-2);
+      const jsonData = [];
+      jsonData.push(KEIBA_YEAR + KEIBA_MONTH + KEIBA_DAY);
+      jsonData.push(callSpread.response[j].location);
+      jsonData.push(callSpread.response[j].race);
+      jsonData.push(callSpread.response[j].class);
+      jsonData.push(callSpread.response[j].field);
+      jsonData.push(callSpread.response[j].distance);
+      jsonData.push(callSpread.response[j].condition);
+      jsonData.push(callSpread.response[j].place);
+      jsonData.push(callSpread.response[j].popular);
+      jsonData.push(callSpread.response[j].corner4);
+      jsonData.push(callSpread.response[j].pci);
+      keibaDataArr.push(jsonData);
+    }
+    keibaData(keibaDataArr);
+  }
+}
+
 // --input入力値取得--
 const LOCATION_LENGTH = trend.locationChoice.length;
 const DISTANCE_LENGTH = trend.distanceChoice.length;
@@ -24,7 +54,7 @@ document.getElementById('search').addEventListener('click', () => {
     const cutYear = displayDay.substr(0, 4);
     const cutMonth = displayDay.substr(5, 2);
     const cutDay = displayDay.substr(8, 2);
-    let cutDate = `${cutYear}${cutMonth}${cutDay}`;
+    cutDate = `${cutYear}${cutMonth}${cutDay}`;
 
     //未来を選んだ処理
     if(GET_TODAY < cutDate) {
@@ -46,44 +76,29 @@ document.getElementById('search').addEventListener('click', () => {
     }
   }
   
-  //2だった場合は文字列出力
+  //2だった場合は正常処理
   if(displayCounter == 2) { 
+    //日付
     document.getElementById('trendDay').textContent = displayDay;
-    document.getElementById('trendField').textContent = displayLocation;
+    callSpread(function(keibaDataArr) {
+      keibaDataArr.forEach((dayValue, index) => {
+        if(cutDate.slice(-6) == dayValue[0]) {
+          console.log(keibaDataArr[index][1]);
+          console.log(keibaDataArr[index][2]);
+          console.log(keibaDataArr[index][3]);
+          console.log(keibaDataArr[index][4]);
+          console.log(keibaDataArr[index][5]);
+          console.log(keibaDataArr[index][6]);
+        }
+      });
+    });
+
+    //開催場
+    document.getElementById('trendField').textContent = displayLocation;   
   } else {
     displayCounter = 0;
   }
 });
-
-//スプレッドシートjson取得
-function callSpread(keibaData) {
-  const callSpread = new XMLHttpRequest();
-  callSpread.open('GET', 'https://script.google.com/macros/s/AKfycbw9jVHMTWumDtzQ0BObOqLoEUbvWlMm1JUzKDGTbnxiYofugew/exec', true);
-  callSpread.responseType = 'json';
-  callSpread.send();
-  callSpread.onload = function() {
-    const keibaDataArr = [];
-    for(let j = 0; j <= callSpread.response.length - 1; j++) {
-      const KEIBA_YEAR = callSpread.response[j].year;
-      const KEIBA_MONTH = ('0' + callSpread.response[j].month).slice(-2);
-      const KEIBA_DAY = callSpread.response[j].day;
-      const jsonData = [];
-      jsonData.push(KEIBA_YEAR + KEIBA_MONTH + KEIBA_DAY);
-      jsonData.push(callSpread.response[j].location);
-      jsonData.push(callSpread.response[j].race);
-      jsonData.push(callSpread.response[j].class);
-      jsonData.push(callSpread.response[j].field);
-      jsonData.push(callSpread.response[j].distance);
-      jsonData.push(callSpread.response[j].condition);
-      jsonData.push(callSpread.response[j].place);
-      jsonData.push(callSpread.response[j].popular);
-      jsonData.push(callSpread.response[j].corner4);
-      jsonData.push(callSpread.response[j].pci);
-      keibaDataArr.push(jsonData);
-    }
-    keibaData(keibaDataArr);
-  }
-}
 
 document.getElementById('test').addEventListener('click', () => {
   callSpread(function(keibaDataArr) {
