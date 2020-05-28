@@ -56,74 +56,83 @@ document.getElementById('search').addEventListener('click', () => {
 });
 
 //スプレッドシートjson取得
-function callSpread(arr) {
+function callSpread(keibaData) {
   const callSpread = new XMLHttpRequest();
   callSpread.open('GET', 'https://script.google.com/macros/s/AKfycbw9jVHMTWumDtzQ0BObOqLoEUbvWlMm1JUzKDGTbnxiYofugew/exec', true);
   callSpread.responseType = 'json';
   callSpread.send();
   callSpread.onload = function() {
-    const popArr = [];
+    const keibaDataArr = [];
     for(let j = 0; j <= callSpread.response.length - 1; j++) {
-      popArr.push(callSpread.response[j].pop);
+      const KEIBA_YEAR = callSpread.response[j].year;
+      const KEIBA_MONTH = ('0' + callSpread.response[j].month).slice(-2);
+      const KEIBA_DAY = callSpread.response[j].day;
+      const jsonData = [];
+      jsonData.push(KEIBA_YEAR + KEIBA_MONTH + KEIBA_DAY);
+      jsonData.push(callSpread.response[j].location);
+      jsonData.push(callSpread.response[j].race);
+      jsonData.push(callSpread.response[j].class);
+      jsonData.push(callSpread.response[j].field);
+      jsonData.push(callSpread.response[j].distance);
+      jsonData.push(callSpread.response[j].condition);
+      jsonData.push(callSpread.response[j].place);
+      jsonData.push(callSpread.response[j].popular);
+      jsonData.push(callSpread.response[j].corner4);
+      jsonData.push(callSpread.response[j].pci);
+      keibaDataArr.push(jsonData);
     }
-   
-    const splitPopArr = [];
-    let k = 0;
-    while(k < popArr.length) {
-      if(k % 3 == 0) {
-        splitPopArr.push(popArr.slice(k, k + 3));  
-      }
-      k ++;
-    }
-    arr(splitPopArr);
+    keibaData(keibaDataArr);
   }
 }
 
 document.getElementById('test').addEventListener('click', () => {
-  callSpread(function (splitPopArr) {
+  callSpread(function(keibaDataArr) {
     let convArg1 = 0;
     let convArg2 = 0;
     let convArg3 = 0;
-  
-    for(let arrCount = 0; arrCount <= splitPopArr.length - 1; arrCount++) {
-      splitPopArr[arrCount].forEach((placeValue, index) => {
-        if(index == 0) {
-          convArg1 = placeValue;
-        } else if (index == 1) {
-          convArg2 = placeValue;
-        } else {
-          convArg3 = placeValue;
-        }
-      });
-      console.log(charConv(convArg1, convArg2, convArg3));
-      console.log(popSum(convArg1, convArg2, convArg3));
 
-      if(charCheck(charConv(convArg1, convArg2, convArg3)) == 'blanchFlow') {
-        if(charConv(convArg1, convArg2, convArg3) == midlarArr[0]) {
-          //BBC処理
-          if(popSum(6, 5, 10) <= 21) {
-            console.log('中荒れ');
+    keibaDataArr.forEach((popValue, index) => {
+      if(popValue[8]) {
+        switch(index % 3) {
+          case 0:
+            convArg1 = popValue[8];
+            break;
+          case 1:
+            convArg2 = popValue[8];
+            break;
+          case 2:
+            convArg3 = popValue[8];
+            break;
+        }
+        console.log(charConv(convArg1, convArg2, convArg3));
+        
+        if(charCheck(charConv(convArg1, convArg2, convArg3)) == 'blanchFlow') {
+          if(charConv(convArg1, convArg2, convArg3) == midlarArr[0]) {
+            //BBC処理
+            if(popSum(6, 5, 10) <= 21) {
+              console.log('中荒れ');
+            } else {
+              console.log('大荒れ');
+            }
+          } else if(charConv(convArg1, convArg2, convArg3) == midlarArr[4]) {
+            //ACE処理
+            if(popSum(6, 5, 10) <= 30) {
+              console.log('中荒れ');
+            } else {
+              console.log('大荒れ');
+            }
           } else {
-            console.log('大荒れ');
-          }
-        } else if(charConv(convArg1, convArg2, convArg3) == midlarArr[4]) {
-          //ACE処理
-          if(popSum(6, 5, 10) <= 30) {
-            console.log('中荒れ');
-          } else {
-            console.log('大荒れ');
+            //AEE,ABD,ACC処理
+            if(popSum(6, 5, 10) <= 22) {
+              console.log('中荒れ');
+            } else {
+              console.log('大荒れ');
+            }
           }
         } else {
-          //AEE,ABD,ACC処理
-          if(popSum(6, 5, 10) <= 22) {
-            console.log('中荒れ');
-          } else {
-            console.log('大荒れ');
-          }
+          console.log(charCheck(charConv(convArg1, convArg2, convArg3)));
         }
-      } else {
-        console.log(charCheck(charConv(convArg1, convArg2, convArg3)));
       }
-    }
+    });
   });
 });
