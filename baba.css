@@ -34,5 +34,11 @@ body {
 }
 
 #result > p {
+  margin: 5px;
   padding: 10px;
+}
+
+#resultHtml > ul {
+  margin: -15px;
+  list-style: none;
 }
