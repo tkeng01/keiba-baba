@@ -75,7 +75,7 @@ document.getElementById('search').addEventListener('click', () => {
       }
     }
   }
-  
+
   //2だった場合は正常処理
   if(displayCounter == 2) { 
     callSpread(function(keibaDataArr) {
@@ -92,17 +92,43 @@ document.getElementById('search').addEventListener('click', () => {
         }
       });
       console.log(pullOutArr);
+
+      let choiceField = trend.fieldChoice.value;
+      let calcPci = (parseInt(pullOutArr[10]) + parseInt(pullOutArr[21]) + parseInt(pullOutArr[32])) / 3;
+
       let resultHtml = '<ul>';
-      resultHtml += '<li>' + pullOutArr[2] + 'R' + '</li>';
-      resultHtml += '<li>' + pullOutArr[3] + '</li>';
-      resultHtml += '<li>' + pullOutArr[4] + '</li>';
-      resultHtml += '<li>' + pullOutArr[5] + '</li>';
-      resultHtml += '<li>' + pullOutArr[6] + '</li>';
-      resultHtml += '<li>' + pullOutArr[35] + 'R' + '</li>';
-      resultHtml += '<li>' + pullOutArr[36] + '</li>';
-      resultHtml += '<li>' + pullOutArr[37] + '</li>';
-      resultHtml += '<li>' + pullOutArr[38] + '</li>';
-      resultHtml += '<li>' + pullOutArr[39] + '</li>';
+      switch(choiceField) {
+        case 'turfDirt':
+          resultHtml += '<li>' + pullOutArr[2] + 'R' + '</li>';
+          resultHtml += '<li>' + pullOutArr[3] + '</li>';
+          resultHtml += '<li>' + pullOutArr[4] + '</li>';
+          resultHtml += '<li>' + pullOutArr[5] + '</li>';
+          resultHtml += '<li>' + pullOutArr[6] + '</li>';
+          resultHtml += '<li>' + calcPci + '</li>';
+          resultHtml += '<li>' + pullOutArr[35] + 'R' + '</li>';
+          resultHtml += '<li>' + pullOutArr[36] + '</li>';
+          resultHtml += '<li>' + pullOutArr[37] + '</li>';
+          resultHtml += '<li>' + pullOutArr[38] + '</li>';
+          resultHtml += '<li>' + pullOutArr[39] + '</li>';
+          break;
+        case 'turf':
+          //芝出力
+          resultHtml += '<li>' + pullOutArr[35] + 'R' + '</li>';
+          resultHtml += '<li>' + pullOutArr[36] + '</li>';
+          resultHtml += '<li>' + pullOutArr[37] + '</li>';
+          resultHtml += '<li>' + pullOutArr[38] + '</li>';
+          resultHtml += '<li>' + pullOutArr[39] + '</li>';
+          break;
+        case 'dirt':
+          //ダート出力
+          resultHtml += '<li>' + pullOutArr[2] + 'R' + '</li>';
+          resultHtml += '<li>' + pullOutArr[3] + '</li>';
+          resultHtml += '<li>' + pullOutArr[4] + '</li>';
+          resultHtml += '<li>' + pullOutArr[5] + '</li>';
+          resultHtml += '<li>' + pullOutArr[6] + '</li>';
+          resultHtml += '<li>' + calcPci + '</li>';
+          break;
+      }
       resultHtml += '</ul>';
       document.getElementById('resultHtml').innerHTML = resultHtml;
     });
