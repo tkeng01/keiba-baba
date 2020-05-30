@@ -44,4 +44,3 @@ function doGet(request) {
     return ContentService.createTextOutput(func + '(' + JSON.stringify(data, null, 2) + ')')
     .setMimeType(ContentService.MimeType.JAVASCRIPT);
 }
-
