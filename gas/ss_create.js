@@ -1,3 +1,13 @@
+/*
+    ■最終的に達成したいこと
+      Googleドライブにcsvファイルがアップロードされたらその内容をスプレッドシート（ss）に転記し、それをjson形式で表示する
+  
+    ■必要な機能
+      ・転記用に新しいssを作成する
+      ・csvファイルから必要なデータを抽出しssに転記する
+      ・ssの内容をjson形式で表示する
+*/
+
 function ss_create() {
   // ss_from_csvフォルダのURL：https://drive.google.com/drive/u/3/folders/1BFC6bMZm-6SJSAP5EDaafyhKksnn2Y9i
   // ss_from_csvフォルダのID：1BFC6bMZm-6SJSAP5EDaafyhKksnn2Y9i
@@ -15,4 +25,11 @@ function createSpreadsheetInfolder(folderID, fileName) {
   var copiedFile = originalFile.makeCopy(fileName, folder);
   DriveApp.getRootFolder().removeFile(originalFile);
   return copiedFile;
+}
+
+function csv_to_ss(){
+  var blob = form.myFile;
+  var csvText = blob.getDataAsString();
+  var csvValues = Utilities.parseCsv(csvText)
+  SpreadsheetApp.getActiveSheet().getRange(1, 1, values.length, values[0].length).setValues(csvValues);
 }
