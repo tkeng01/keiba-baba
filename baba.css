@@ -27,10 +27,10 @@ body {
   }
 
 #result {
-  height: 200px;
+  height: auto;
   width: 500px;
   background-color: paleturquoise;
-  border-radius: 15px;
+  border-radius: 7px;
 }
 
 #result > p {

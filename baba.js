@@ -78,23 +78,33 @@ document.getElementById('search').addEventListener('click', () => {
   
   //2だった場合は正常処理
   if(displayCounter == 2) { 
-    //日付
-    
     callSpread(function(keibaDataArr) {
-      keibaDataArr.forEach((dayLocatValue, index) => {
-        let resultHtml = '<ul>';
+      let pullOutArr = [];
+      const ONE_JSON_LENGTH = 10;
+      //json全データをチェック
+      keibaDataArr.forEach((dayLocatValue) => {
         if(cutDate.slice(-6) == dayLocatValue[0] && displayLocation == dayLocatValue[1]) {
           document.getElementById('trendDay').textContent = displayDay;
           document.getElementById('trendField').textContent = displayLocation;
-          resultHtml += '<li>' + keibaDataArr[index][2] + 'R' + '</li>';
-          resultHtml += '<li>' + keibaDataArr[index][3] + '</li>';
-          resultHtml += '<li>' + keibaDataArr[index][4] + '</li>';
-          resultHtml += '<li>' + keibaDataArr[index][5] + '</li>';
-          resultHtml += '<li>' + keibaDataArr[index][6] + '</li>';
+          for(let pullInfo = 0; pullInfo <= ONE_JSON_LENGTH; pullInfo++) {
+            pullOutArr.push(dayLocatValue[pullInfo]);
+          }
         }
-        resultHtml += '</ul>';
-        document.getElementById('resultHtml').innerHTML = resultHtml;
       });
+      console.log(pullOutArr);
+      let resultHtml = '<ul>';
+      resultHtml += '<li>' + pullOutArr[2] + 'R' + '</li>';
+      resultHtml += '<li>' + pullOutArr[3] + '</li>';
+      resultHtml += '<li>' + pullOutArr[4] + '</li>';
+      resultHtml += '<li>' + pullOutArr[5] + '</li>';
+      resultHtml += '<li>' + pullOutArr[6] + '</li>';
+      resultHtml += '<li>' + pullOutArr[35] + 'R' + '</li>';
+      resultHtml += '<li>' + pullOutArr[36] + '</li>';
+      resultHtml += '<li>' + pullOutArr[37] + '</li>';
+      resultHtml += '<li>' + pullOutArr[38] + '</li>';
+      resultHtml += '<li>' + pullOutArr[39] + '</li>';
+      resultHtml += '</ul>';
+      document.getElementById('resultHtml').innerHTML = resultHtml;
     });
   } else {
     displayCounter = 0;
@@ -103,6 +113,7 @@ document.getElementById('search').addEventListener('click', () => {
 
 document.getElementById('test').addEventListener('click', () => {
   callSpread(function(keibaDataArr) {
+    console.log(keibaDataArr);
     let convArg1 = 0;
     let convArg2 = 0;
     let convArg3 = 0;
@@ -151,4 +162,4 @@ document.getElementById('test').addEventListener('click', () => {
       }
     });
   });
-});
+}); 
