@@ -91,10 +91,18 @@ document.getElementById('search').addEventListener('click', () => {
           }
         }
       });
-      console.log(pullOutArr);
+
+      //1Rごと情報を配列に格納
+      const splitRaceDate = [];
+      for(let splitCount = 0; splitCount <= pullOutArr.length; splitCount++) {
+        if(splitCount !== 0 && splitCount % 33 == 0) {
+          splitRaceDate.push(pullOutArr.slice((splitCount - 33), splitCount));
+        }
+      }
+      console.log(splitRaceDate);
 
       let choiceField = trend.fieldChoice.value;
-      let calcPci = (parseInt(pullOutArr[10]) + parseInt(pullOutArr[21]) + parseInt(pullOutArr[32])) / 3;
+      let calcPci = (parseInt(splitRaceDate[0][10]) + parseInt(splitRaceDate[0][21]) + parseInt(splitRaceDate[0][32])) / 3;
 
       let resultHtml = '<ul>';
       switch(choiceField) {
@@ -144,9 +152,9 @@ document.getElementById('test').addEventListener('click', () => {
     let convArg2 = 0;
     let convArg3 = 0;
 
-    keibaDataArr.forEach((popValue, index) => {
+    keibaDataArr.forEach((popValue, number) => {
       if(popValue[8]) {
-        switch(index % 3) {
+        switch(number % 3) {
           case 0:
             convArg1 = popValue[8];
             break;
