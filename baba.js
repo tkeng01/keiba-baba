@@ -91,54 +91,43 @@ document.getElementById('search').addEventListener('click', () => {
           }
         }
       });
+      
+      let choiceField = trend.fieldChoice.value;
 
       //1Rごと情報を配列に格納
-      const splitRaceDate = [];
+      let splitRaceDate = [];
       for(let splitCount = 0; splitCount <= pullOutArr.length; splitCount++) {
         if(splitCount !== 0 && splitCount % 33 == 0) {
           splitRaceDate.push(pullOutArr.slice((splitCount - 33), splitCount));
         }
       }
-      console.log(splitRaceDate);
 
-      let choiceField = trend.fieldChoice.value;
-      let calcPci = (parseInt(splitRaceDate[0][10]) + parseInt(splitRaceDate[0][21]) + parseInt(splitRaceDate[0][32])) / 3;
-
+      //HTML画面出力
       let resultHtml = '<ul>';
-      switch(choiceField) {
-        case 'turfDirt':
-          resultHtml += '<li>' + pullOutArr[2] + 'R' + '</li>';
-          resultHtml += '<li>' + pullOutArr[3] + '</li>';
-          resultHtml += '<li>' + pullOutArr[4] + '</li>';
-          resultHtml += '<li>' + pullOutArr[5] + '</li>';
-          resultHtml += '<li>' + pullOutArr[6] + '</li>';
-          resultHtml += '<li>' + calcPci + '</li>';
-          resultHtml += '<li>' + pullOutArr[35] + 'R' + '</li>';
-          resultHtml += '<li>' + pullOutArr[36] + '</li>';
-          resultHtml += '<li>' + pullOutArr[37] + '</li>';
-          resultHtml += '<li>' + pullOutArr[38] + '</li>';
-          resultHtml += '<li>' + pullOutArr[39] + '</li>';
-          break;
-        case 'turf':
-          //芝出力
-          resultHtml += '<li>' + pullOutArr[35] + 'R' + '</li>';
-          resultHtml += '<li>' + pullOutArr[36] + '</li>';
-          resultHtml += '<li>' + pullOutArr[37] + '</li>';
-          resultHtml += '<li>' + pullOutArr[38] + '</li>';
-          resultHtml += '<li>' + pullOutArr[39] + '</li>';
-          break;
-        case 'dirt':
-          //ダート出力
-          resultHtml += '<li>' + pullOutArr[2] + 'R' + '</li>';
-          resultHtml += '<li>' + pullOutArr[3] + '</li>';
-          resultHtml += '<li>' + pullOutArr[4] + '</li>';
-          resultHtml += '<li>' + pullOutArr[5] + '</li>';
-          resultHtml += '<li>' + pullOutArr[6] + '</li>';
-          resultHtml += '<li>' + calcPci + '</li>';
-          break;
-      }
+      for(let turf = 0; turf <= splitRaceDate.length - 1; turf++) {
+        switch(splitRaceDate[turf][4]) {
+          case '芝':
+            resultHtml += '<li>' + splitRaceDate[turf][2] + '</li>'
+            resultHtml += '<li>' + splitRaceDate[turf][3] + '</li>'
+            resultHtml += '<li>' + splitRaceDate[turf][4] + '</li>'
+            resultHtml += '<li>' + splitRaceDate[turf][5] + '</li>'
+            resultHtml += '<li>' + splitRaceDate[turf][6] + '</li>'
+            break;
+          case 'ダ':
+            resultHtml += '<li>' + splitRaceDate[turf][2] + '</li>'
+            resultHtml += '<li>' + splitRaceDate[turf][3] + '</li>'
+            resultHtml += '<li>' + splitRaceDate[turf][4] + '</li>'
+            resultHtml += '<li>' + splitRaceDate[turf][5] + '</li>'
+            resultHtml += '<li>' + splitRaceDate[turf][6] + '</li>'
+            break;
+          }
+        }
       resultHtml += '</ul>';
       document.getElementById('resultHtml').innerHTML = resultHtml;
+
+      //PCI計算
+      // console.log(splitRaceDate.length);
+      // let calcPci = (parseInt(splitRaceDate[0][10]) + parseInt(splitRaceDate[0][21]) + parseInt(splitRaceDate[0][32])) / 3;
     });
   } else {
     displayCounter = 0;
