@@ -91,8 +91,6 @@ document.getElementById('search').addEventListener('click', () => {
           }
         }
       });
-      
-      let choiceField = trend.fieldChoice.value;
 
       //1Rごと情報を配列に格納
       let splitRaceDate = [];
@@ -102,26 +100,61 @@ document.getElementById('search').addEventListener('click', () => {
         }
       }
 
-      //HTML画面出力
-      let resultHtml = '<ul>';
+      let turfArr = [];
+      let dirtArr = [];
+      let turfdirtArr = [];
       for(let turf = 0; turf <= splitRaceDate.length - 1; turf++) {
         switch(splitRaceDate[turf][4]) {
           case '芝':
-            resultHtml += '<li>' + splitRaceDate[turf][2] + '</li>'
-            resultHtml += '<li>' + splitRaceDate[turf][3] + '</li>'
-            resultHtml += '<li>' + splitRaceDate[turf][4] + '</li>'
-            resultHtml += '<li>' + splitRaceDate[turf][5] + '</li>'
-            resultHtml += '<li>' + splitRaceDate[turf][6] + '</li>'
+            turfArr.push(splitRaceDate[turf][2] + 'R');
+            turfArr.push(splitRaceDate[turf][3]);
+            turfArr.push(splitRaceDate[turf][4]);
+            turfArr.push(splitRaceDate[turf][5] + 'm');
+            turfArr.push(splitRaceDate[turf][6]);
+            turfdirtArr.push(splitRaceDate[turf][2] + 'R');
+            turfdirtArr.push(splitRaceDate[turf][3]);
+            turfdirtArr.push(splitRaceDate[turf][4]);
+            turfdirtArr.push(splitRaceDate[turf][5] + 'm');
+            turfdirtArr.push(splitRaceDate[turf][6]);
             break;
           case 'ダ':
-            resultHtml += '<li>' + splitRaceDate[turf][2] + '</li>'
-            resultHtml += '<li>' + splitRaceDate[turf][3] + '</li>'
-            resultHtml += '<li>' + splitRaceDate[turf][4] + '</li>'
-            resultHtml += '<li>' + splitRaceDate[turf][5] + '</li>'
-            resultHtml += '<li>' + splitRaceDate[turf][6] + '</li>'
+            dirtArr.push(splitRaceDate[turf][2] + 'R');
+            dirtArr.push(splitRaceDate[turf][3]);
+            dirtArr.push(splitRaceDate[turf][4]);
+            dirtArr.push(splitRaceDate[turf][5] + 'm');
+            dirtArr.push(splitRaceDate[turf][6]);
+            turfdirtArr.push(splitRaceDate[turf][2] + 'R');
+            turfdirtArr.push(splitRaceDate[turf][3]);
+            turfdirtArr.push(splitRaceDate[turf][4]);
+            turfdirtArr.push(splitRaceDate[turf][5] + 'm');
+            turfdirtArr.push(splitRaceDate[turf][6]);
             break;
-          }
         }
+      }
+
+      //HTML画面出力
+      let choiceField = trend.fieldChoice.value;
+      let resultHtml = '<ul>';
+      switch(choiceField) {
+        case 'turfdirt':
+          //全レース
+          turfdirtArr.forEach((turfdirt) => {
+            resultHtml += '<li>' + turfdirt + '</li>';
+          })
+          break;
+        case 'turf':
+          // 芝レース
+          turfArr.forEach((turf) => {
+            resultHtml += '<li>' + turf + '</li>';
+          })
+          break;
+        case 'dirt':
+          // ダートレース
+          dirtArr.forEach((dirt) => {
+            resultHtml += '<li>' + dirt + '</li>';
+          })
+          break;
+      }
       resultHtml += '</ul>';
       document.getElementById('resultHtml').innerHTML = resultHtml;
 
