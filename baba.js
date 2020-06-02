@@ -100,22 +100,28 @@ document.getElementById('search').addEventListener('click', () => {
         }
       }
 
+      console.log(splitRaceDate);
+
       let turfArr = [];
       let dirtArr = [];
       let turfdirtArr = [];
       for(let turf = 0; turf <= splitRaceDate.length - 1; turf++) {
+        let calcPci = ((parseInt(splitRaceDate[turf][10]) + parseInt(splitRaceDate[turf][21]) + parseInt(splitRaceDate[turf][32])) / 3).toFixed(2);
         switch(splitRaceDate[turf][4]) {
           case '芝':
+            //PCI計算
             turfArr.push(splitRaceDate[turf][2] + 'R');
             turfArr.push(splitRaceDate[turf][3]);
             turfArr.push(splitRaceDate[turf][4]);
             turfArr.push(splitRaceDate[turf][5] + 'm');
             turfArr.push(splitRaceDate[turf][6]);
+            turfArr.push(calcPci);
             turfdirtArr.push(splitRaceDate[turf][2] + 'R');
             turfdirtArr.push(splitRaceDate[turf][3]);
             turfdirtArr.push(splitRaceDate[turf][4]);
             turfdirtArr.push(splitRaceDate[turf][5] + 'm');
             turfdirtArr.push(splitRaceDate[turf][6]);
+            turfdirtArr.push(calcPci);
             break;
           case 'ダ':
             dirtArr.push(splitRaceDate[turf][2] + 'R');
@@ -123,14 +129,20 @@ document.getElementById('search').addEventListener('click', () => {
             dirtArr.push(splitRaceDate[turf][4]);
             dirtArr.push(splitRaceDate[turf][5] + 'm');
             dirtArr.push(splitRaceDate[turf][6]);
+            dirtArr.push(calcPci);
             turfdirtArr.push(splitRaceDate[turf][2] + 'R');
             turfdirtArr.push(splitRaceDate[turf][3]);
             turfdirtArr.push(splitRaceDate[turf][4]);
             turfdirtArr.push(splitRaceDate[turf][5] + 'm');
             turfdirtArr.push(splitRaceDate[turf][6]);
+            turfdirtArr.push(calcPci);
             break;
         }
       }
+
+      console.log(turfdirtArr);
+      console.log(turfArr);
+      console.log(dirtArr);
 
       //HTML画面出力
       let choiceField = trend.fieldChoice.value;
@@ -157,10 +169,6 @@ document.getElementById('search').addEventListener('click', () => {
       }
       resultHtml += '</ul>';
       document.getElementById('resultHtml').innerHTML = resultHtml;
-
-      //PCI計算
-      // console.log(splitRaceDate.length);
-      // let calcPci = (parseInt(splitRaceDate[0][10]) + parseInt(splitRaceDate[0][21]) + parseInt(splitRaceDate[0][32])) / 3;
     });
   } else {
     displayCounter = 0;
