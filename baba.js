@@ -31,6 +31,7 @@ function callSpread(keibaData) {
       jsonData.push(callSpread.response[j].popular);
       jsonData.push(callSpread.response[j].corner4);
       jsonData.push(callSpread.response[j].pci);
+      jsonData.push(callSpread.response[j].number);
       keibaDataArr.push(jsonData);
     }
     keibaData(keibaDataArr);
@@ -80,7 +81,7 @@ document.getElementById('search').addEventListener('click', () => {
   if(displayCounter == 2) { 
     callSpread(function(keibaDataArr) {
       let pullOutArr = [];
-      const ONE_JSON_LENGTH = 10;
+      const ONE_JSON_LENGTH = 11;
       //json全データをチェック
       keibaDataArr.forEach((dayLocatValue) => {
         if(cutDate.slice(-6) == dayLocatValue[0] && displayLocation == dayLocatValue[1]) {
@@ -95,54 +96,60 @@ document.getElementById('search').addEventListener('click', () => {
       //1Rごと情報を配列に格納
       let splitRaceDate = [];
       for(let splitCount = 0; splitCount <= pullOutArr.length; splitCount++) {
-        if(splitCount !== 0 && splitCount % 33 == 0) {
-          splitRaceDate.push(pullOutArr.slice((splitCount - 33), splitCount));
+        if(splitCount !== 0 && splitCount % 36 == 0) {
+          splitRaceDate.push(pullOutArr.slice((splitCount - 36), splitCount));
         }
       }
-
-      console.log(splitRaceDate);
 
       let turfArr = [];
       let dirtArr = [];
       let turfdirtArr = [];
       for(let turf = 0; turf <= splitRaceDate.length - 1; turf++) {
-        let calcPci = ((parseInt(splitRaceDate[turf][10]) + parseInt(splitRaceDate[turf][21]) + parseInt(splitRaceDate[turf][32])) / 3).toFixed(2);
+        let displayRaceNum = splitRaceDate[turf][2] + 'R';
+        let displayDistance = splitRaceDate[turf][5] + 'm';
+        let displayTotal = splitRaceDate[turf][11] + '頭';
+        let displayPopular = '馬券内人気：' + splitRaceDate[turf][8] + ',\n' + splitRaceDate[turf][20] + ',\n' + splitRaceDate[turf][32]
+        let displayPci = 'PCI：' + ((parseInt(splitRaceDate[turf][10]) + parseInt(splitRaceDate[turf][22]) + parseInt(splitRaceDate[turf][34])) / 3).toFixed(2);
         switch(splitRaceDate[turf][4]) {
           case '芝':
             //PCI計算
-            turfArr.push(splitRaceDate[turf][2] + 'R');
+            turfArr.push(displayRaceNum);
             turfArr.push(splitRaceDate[turf][3]);
             turfArr.push(splitRaceDate[turf][4]);
-            turfArr.push(splitRaceDate[turf][5] + 'm');
+            turfArr.push(displayDistance);
+            turfArr.push(displayTotal);
             turfArr.push(splitRaceDate[turf][6]);
-            turfArr.push(calcPci);
-            turfdirtArr.push(splitRaceDate[turf][2] + 'R');
+            turfArr.push(displayPopular);
+            turfArr.push(displayPci);
+            turfdirtArr.push(displayRaceNum);
             turfdirtArr.push(splitRaceDate[turf][3]);
             turfdirtArr.push(splitRaceDate[turf][4]);
-            turfdirtArr.push(splitRaceDate[turf][5] + 'm');
+            turfdirtArr.push(displayDistance);
+            turfdirtArr.push(displayTotal);
             turfdirtArr.push(splitRaceDate[turf][6]);
-            turfdirtArr.push(calcPci);
+            turfdirtArr.push(displayPopular);
+            turfdirtArr.push(displayPci);
             break;
           case 'ダ':
-            dirtArr.push(splitRaceDate[turf][2] + 'R');
+            dirtArr.push(displayRaceNum);
             dirtArr.push(splitRaceDate[turf][3]);
             dirtArr.push(splitRaceDate[turf][4]);
-            dirtArr.push(splitRaceDate[turf][5] + 'm');
+            dirtArr.push(displayDistance);
+            dirtArr.push(displayTotal);
             dirtArr.push(splitRaceDate[turf][6]);
-            dirtArr.push(calcPci);
-            turfdirtArr.push(splitRaceDate[turf][2] + 'R');
+            dirtArr.push(displayPopular);
+            dirtArr.push(displayPci);
+            turfdirtArr.push(displayRaceNum);
             turfdirtArr.push(splitRaceDate[turf][3]);
             turfdirtArr.push(splitRaceDate[turf][4]);
-            turfdirtArr.push(splitRaceDate[turf][5] + 'm');
+            turfdirtArr.push(displayDistance);
+            turfdirtArr.push(displayTotal);
             turfdirtArr.push(splitRaceDate[turf][6]);
-            turfdirtArr.push(calcPci);
+            turfdirtArr.push(displayPopular);
+            turfdirtArr.push(displayPci);
             break;
         }
       }
-
-      console.log(turfdirtArr);
-      console.log(turfArr);
-      console.log(dirtArr);
 
       //HTML画面出力
       let choiceField = trend.fieldChoice.value;
@@ -177,7 +184,6 @@ document.getElementById('search').addEventListener('click', () => {
 
 document.getElementById('test').addEventListener('click', () => {
   callSpread(function(keibaDataArr) {
-    console.log(keibaDataArr);
     let convArg1 = 0;
     let convArg2 = 0;
     let convArg3 = 0;
@@ -227,3 +233,20 @@ document.getElementById('test').addEventListener('click', () => {
     });
   });
 }); 
+
+// function testSpread(json) {
+//   const testSpread = new XMLHttpRequest();
+//   testSpread.open('GET', 'https://script.google.com/macros/s/AKfycbwDZSXsZRDzV3-R5_XavC37-LEAohi2tz0Ok48NHtW_R1j6fxtG/exec', true);
+//   testSpread.responseType = 'json';
+//   testSpread.send();
+//   testSpread.onload = function() {
+//     let yamane = testSpread.response;
+//     json(yamane);
+//   }
+// }
+
+// document.getElementById('test').addEventListener('click', () => {
+//   testSpread(function(yamane) {
+//     console.log(yamane);
+//   });
+// });
