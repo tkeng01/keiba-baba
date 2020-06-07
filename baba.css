@@ -13,10 +13,7 @@ body {
 }
 
 #top p {
-  margin: 0;
-  position: fixed;
-  top: 14px;
-  left: 55px;
+  margin: 10px;
 }
 
   input[type="date"]::-webkit-inner-spin-button{
