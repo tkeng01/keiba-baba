@@ -101,51 +101,111 @@ document.getElementById('search').addEventListener('click', () => {
         }
       }
 
+      //変数宣言
       let turfArr = [];
       let dirtArr = [];
       let turfdirtArr = [];
-      for(let turf = 0; turf <= splitRaceDate.length - 1; turf++) {
-        let displayRaceNum = splitRaceDate[turf][2] + 'R';
-        let displayDistance = splitRaceDate[turf][5] + 'm';
-        let displayTotal = splitRaceDate[turf][11] + '頭';
-        let displayPopular = '馬券内人気：' + splitRaceDate[turf][8] + ',\n' + splitRaceDate[turf][20] + ',\n' + splitRaceDate[turf][32]
-        let displayPci = 'PCI：' + ((parseInt(splitRaceDate[turf][10]) + parseInt(splitRaceDate[turf][22]) + parseInt(splitRaceDate[turf][34])) / 3).toFixed(2);
-        switch(splitRaceDate[turf][4]) {
+      let positionArr = [];
+      let calcPosition = '';
+      let positionEscape = 1;
+      let positionFront = '';
+      let positionCenter = '';
+      let calcPci = '';
+      let displayRaceNum = '';
+      let displayClass = '';
+      let displayTurf = '';
+      let displayDistance = '';
+      let displayCondition = '';
+      let displayTotal = '';
+      let displayCorner = '';
+      let displayPopular = '';
+      let displayPci = '';
+      let displayPosition = '位置取り：';
+
+      for(let turf = 0; turf <= splitRaceDate.length - 1; turf++) {        
+        //表示代入
+        displayRaceNum = splitRaceDate[turf][2] + 'R';
+        displayClass = splitRaceDate[turf][3];
+        displayTurf = splitRaceDate[turf][4];
+        displayDistance = splitRaceDate[turf][5] + 'm';
+        displayCondition = splitRaceDate[turf][6];
+        displayTotal = splitRaceDate[turf][11] + '頭';
+        displayCorner = '4角：' + splitRaceDate[turf][9] + '\n' + splitRaceDate[turf][21] + '\n' + splitRaceDate[turf][33];
+        displayPopular = '人気：' + splitRaceDate[turf][8] + '\n' + splitRaceDate[turf][20] + '\n' + splitRaceDate[turf][32];
+        displayPci = 'PCI：' + ((parseInt(splitRaceDate[turf][10]) + parseInt(splitRaceDate[turf][22]) + parseInt(splitRaceDate[turf][34])) / 3).toFixed(2);
+        positionArr = [splitRaceDate[turf][9], splitRaceDate[turf][21], splitRaceDate[turf][33]];
+        calcPosition = ((splitRaceDate[turf][11] - 1) / 3).toFixed(0);
+        positionFront = parseInt(calcPosition);
+        positionCenter = parseInt(calcPosition * 2);
+        
+        switch(displayTurf) {
           case '芝':
-            //PCI計算
+            //位置取り計算
+            displayPosition = '位置取り：';
+            positionArr.forEach((position) => {
+              if(position == positionEscape) {
+                displayPosition += '逃' + '\t';
+              } else if(positionEscape < position && position <= positionFront) {
+                displayPosition += '先' + '\t';
+              } else if(positionFront < position && position <= positionCenter) {
+                displayPosition += '差' + '\t';
+              } else {
+                displayPosition += '追' + '\t';
+              }
+            });
             turfArr.push(displayRaceNum);
-            turfArr.push(splitRaceDate[turf][3]);
-            turfArr.push(splitRaceDate[turf][4]);
+            turfArr.push(displayClass);
+            turfArr.push(displayTurf);
             turfArr.push(displayDistance);
             turfArr.push(displayTotal);
-            turfArr.push(splitRaceDate[turf][6]);
+            turfArr.push(displayCondition);
+            turfArr.push(displayCorner);
             turfArr.push(displayPopular);
+            turfArr.push(displayPosition);
             turfArr.push(displayPci);
             turfdirtArr.push(displayRaceNum);
-            turfdirtArr.push(splitRaceDate[turf][3]);
-            turfdirtArr.push(splitRaceDate[turf][4]);
+            turfdirtArr.push(displayClass);
+            turfdirtArr.push(displayTurf);
             turfdirtArr.push(displayDistance);
             turfdirtArr.push(displayTotal);
-            turfdirtArr.push(splitRaceDate[turf][6]);
+            turfdirtArr.push(displayCondition);
+            turfdirtArr.push(displayCorner);
             turfdirtArr.push(displayPopular);
+            turfdirtArr.push(displayPosition);
             turfdirtArr.push(displayPci);
             break;
           case 'ダ':
+            displayPosition = '位置取り：';
+            positionArr.forEach((position) => {
+              if(position == positionEscape) {
+                displayPosition += '逃' + '\t';
+              } else if(positionEscape < position && position <= positionFront) {
+                displayPosition += '先' + '\t';
+              } else if(positionFront < position && position <= positionCenter) {
+                displayPosition += '差' + '\t';
+              } else {
+                displayPosition += '追' + '\t';
+              }
+            });
             dirtArr.push(displayRaceNum);
-            dirtArr.push(splitRaceDate[turf][3]);
-            dirtArr.push(splitRaceDate[turf][4]);
+            dirtArr.push(displayClass);
+            dirtArr.push(displayTurf);
             dirtArr.push(displayDistance);
             dirtArr.push(displayTotal);
-            dirtArr.push(splitRaceDate[turf][6]);
+            dirtArr.push(displayCondition);
+            dirtArr.push(displayCorner);
             dirtArr.push(displayPopular);
+            dirtArr.push(displayPosition);
             dirtArr.push(displayPci);
             turfdirtArr.push(displayRaceNum);
-            turfdirtArr.push(splitRaceDate[turf][3]);
-            turfdirtArr.push(splitRaceDate[turf][4]);
+            turfdirtArr.push(displayClass);
+            turfdirtArr.push(displayTurf);
             turfdirtArr.push(displayDistance);
             turfdirtArr.push(displayTotal);
-            turfdirtArr.push(splitRaceDate[turf][6]);
+            turfdirtArr.push(displayCondition);
+            turfdirtArr.push(displayCorner);
             turfdirtArr.push(displayPopular);
+            turfdirtArr.push(displayPosition);
             turfdirtArr.push(displayPci);
             break;
         }
