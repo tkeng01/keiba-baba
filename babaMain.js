@@ -108,6 +108,7 @@ document.getElementById('search').addEventListener('click', () => {
       let positionArr = [];
       let turfPopArr = [];
       let dirtPopArr = [];
+      let turfdirtPopArr = [];
       let calcPosition = '';
       let positionEscape = 1;
       let positionFront = '';
@@ -119,10 +120,11 @@ document.getElementById('search').addEventListener('click', () => {
       let displayDistance = '';
       let displayCondition = '';
       let displayTotal = '';
-      let displayCorner = '';
       let displayPopular = '';
-      let displayPci = '';
+      let displayCorner = '';
       let displayPosition = '位置取り：';
+      let displayPci = '';
+      let displayTrust = '';
       let convArg1 = 0;
       let convArg2 = 0;
       let convArg3 = 0;
@@ -159,31 +161,87 @@ document.getElementById('search').addEventListener('click', () => {
               }
             });
 
+            turfArr.push('\t' + 'class="displayRaceNum">' + displayRaceNum);
+            turfArr.push('\t' + 'class="displayClass">' + displayClass);
+            turfArr.push('\t' + 'class="displayTurf">' + displayTurf);
+            turfArr.push('\t' + 'class="displayDistance">' + displayDistance);
+            turfArr.push('\t' + 'class="displayTotal">' + displayTotal);
+            turfArr.push('\t' + 'class="displayCondition">' + displayCondition);
+            turfArr.push('\t' + 'class="displayPopular">' + displayPopular);
+            turfArr.push('\t' + 'class="displayCorner">' + displayCorner);
+            turfArr.push('\t' + 'class="displayPosition">' + displayPosition);
+            turfArr.push('\t' + 'class="displayPci">' + displayPci);
+            turfdirtArr.push('\t' + 'class="displayRaceNum">' + displayRaceNum);
+            turfdirtArr.push('\t' + 'class="displayClass">' + displayClass);
+            turfdirtArr.push('\t' + 'class="displayTurf">' + displayTurf);
+            turfdirtArr.push('\t' + 'class="displayDistance">' + displayDistance);
+            turfdirtArr.push('\t' + 'class="displayTotal">' + displayTotal);
+            turfdirtArr.push('\t' + 'class="displayCondition">' + displayCondition);
+            turfdirtArr.push('\t' + 'class="displayPopular">' + displayPopular);
+            turfdirtArr.push('\t' + 'class="displayCorner">' + displayCorner);
+            turfdirtArr.push('\t' + 'class="displayPosition">' + displayPosition);
+            turfdirtArr.push('\t' + 'class="displayPci">' + displayPci);
+
             //人気計算用配列
             turfPopArr.push(splitRaceDate[turf][8]);
             turfPopArr.push(splitRaceDate[turf][20]);
             turfPopArr.push(splitRaceDate[turf][32]);
+            turfdirtPopArr.push(splitRaceDate[turf][8]);
+            turfdirtPopArr.push(splitRaceDate[turf][20]);
+            turfdirtPopArr.push(splitRaceDate[turf][32]);
 
-            turfArr.push(displayRaceNum);
-            turfArr.push(displayClass);
-            turfArr.push(displayTurf);
-            turfArr.push(displayDistance);
-            turfArr.push(displayTotal);
-            turfArr.push(displayCondition);
-            turfArr.push(displayPopular);
-            turfArr.push(displayCorner);
-            turfArr.push(displayPosition);
-            turfArr.push(displayPci);
-            turfdirtArr.push(displayRaceNum);
-            turfdirtArr.push(displayClass);
-            turfdirtArr.push(displayTurf);
-            turfdirtArr.push(displayDistance);
-            turfdirtArr.push(displayTotal);
-            turfdirtArr.push(displayCondition);
-            turfdirtArr.push(displayPopular);
-            turfdirtArr.push(displayCorner);
-            turfdirtArr.push(displayPosition);
-            turfdirtArr.push(displayPci);
+            turfPopArr.forEach((pop, num) => {
+              switch(num) {
+                case 0:
+                  convArg1 = pop;
+                  break;
+                case 1:
+                  convArg2 = pop;
+                  break;
+                case 2:
+                  convArg3 = pop;
+                  break;
+              }
+            });
+      
+            turfdirtPopArr.forEach((pop, num) => {
+              switch(num) {
+                case 0:
+                  convArg1 = pop;
+                  break;
+                case 1:
+                  convArg2 = pop;
+                  break;
+                case 2:
+                  convArg3 = pop;
+                  break;
+              }
+            });
+      
+            if(charCheck(charConv(convArg1, convArg2, convArg3)) == 'blanchFlow') {
+              if(charConv(convArg1, convArg2, convArg3) == midlarArr[0]) {  //BBCの場合
+                if(popSum(6, 5, 10) <= 21) {
+                  console.log('中荒れ');
+                } else {
+                  console.log('大荒れ');
+                }
+              } else if(charConv(convArg1, convArg2, convArg3) == midlarArr[4]) { //ACEの場合
+                if(popSum(6, 5, 10) <= 30) {
+                  console.log('中荒れ');
+                } else {
+                  console.log('大荒れ');
+                }
+              } else { ////AEE,ABD,ACCの場合
+                if(popSum(6, 5, 10) <= 22) {
+                  console.log('中荒れ');
+                } else {
+                  console.log('大荒れ');
+                }
+              }
+            } else {
+              turfArr.push('\t' + 'class="displayTrust">' + '信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)));
+              turfdirtArr.push('\t' + 'class="displayTrust">' + '信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)));
+            }
             break;
           case 'ダ':
             displayPosition = '位置取り：';
@@ -199,70 +257,89 @@ document.getElementById('search').addEventListener('click', () => {
               }
             });
 
+            dirtArr.push('\t' + 'class="displayRaceNum">' + displayRaceNum);
+            dirtArr.push('\t' + 'class="displayClass">' + displayClass);
+            dirtArr.push('\t' + 'class="displayTurf">' + displayTurf);
+            dirtArr.push('\t' + 'class="displayDistance">' + displayDistance);
+            dirtArr.push('\t' + 'class="displayTotal">' + displayTotal);
+            dirtArr.push('\t' + 'class="displayCondition">' + displayCondition);
+            dirtArr.push('\t' + 'class="displayPopular">' + displayPopular);
+            dirtArr.push('\t' + 'class="displayCorner">' + displayCorner);
+            dirtArr.push('\t' + 'class="displayPosition">' + displayPosition);
+            dirtArr.push('\t' + 'class="displayPci">' + displayPci);
+            turfdirtArr.push('\t' + 'class="displayRaceNum">' + displayRaceNum);
+            turfdirtArr.push('\t' + 'class="displayClass">' + displayClass);
+            turfdirtArr.push('\t' + 'class="displayTurf">' + displayTurf);
+            turfdirtArr.push('\t' + 'class="displayDistance">' + displayDistance);
+            turfdirtArr.push('\t' + 'class="displayTotal">' + displayTotal);
+            turfdirtArr.push('\t' + 'class="displayCondition">' + displayCondition);
+            turfdirtArr.push('\t' + 'class="displayPopular">' + displayPopular);
+            turfdirtArr.push('\t' + 'class="displayCorner">' + displayCorner);
+            turfdirtArr.push('\t' + 'class="displayPosition">' + displayPosition);
+            turfdirtArr.push('\t' + 'class="displayPci">' + displayPci);
+
+            //人気計算用配列
             dirtPopArr.push(splitRaceDate[turf][8]);
             dirtPopArr.push(splitRaceDate[turf][20]);
             dirtPopArr.push(splitRaceDate[turf][32]);
+            turfdirtPopArr.push(splitRaceDate[turf][8]);
+            turfdirtPopArr.push(splitRaceDate[turf][20]);
+            turfdirtPopArr.push(splitRaceDate[turf][32]);
 
-            dirtArr.push(displayRaceNum);
-            dirtArr.push(displayClass);
-            dirtArr.push(displayTurf);
-            dirtArr.push(displayDistance);
-            dirtArr.push(displayTotal);
-            dirtArr.push(displayCondition);
-            dirtArr.push(displayPopular);
-            dirtArr.push(displayCorner);
-            dirtArr.push(displayPosition);
-            dirtArr.push(displayPci);
-            turfdirtArr.push(displayRaceNum);
-            turfdirtArr.push(displayClass);
-            turfdirtArr.push(displayTurf);
-            turfdirtArr.push(displayDistance);
-            turfdirtArr.push(displayTotal);
-            turfdirtArr.push(displayCondition);
-            turfdirtArr.push(displayPopular);
-            turfdirtArr.push(displayCorner);
-            turfdirtArr.push(displayPosition);
-            turfdirtArr.push(displayPci);
+            turfPopArr.forEach((pop, num) => {
+              switch(num) {
+                case 0:
+                  convArg1 = pop;
+                  break;
+                case 1:
+                  convArg2 = pop;
+                  break;
+                case 2:
+                  convArg3 = pop;
+                  break;
+              }
+            });
+      
+            turfdirtPopArr.forEach((pop, num) => {
+              switch(num) {
+                case 0:
+                  convArg1 = pop;
+                  break;
+                case 1:
+                  convArg2 = pop;
+                  break;
+                case 2:
+                  convArg3 = pop;
+                  break;
+              }
+            });
+      
+            if(charCheck(charConv(convArg1, convArg2, convArg3)) == 'blanchFlow') {
+              if(charConv(convArg1, convArg2, convArg3) == midlarArr[0]) {  //BBCの場合
+                if(popSum(6, 5, 10) <= 21) {
+                  console.log('中荒れ');
+                } else {
+                  console.log('大荒れ');
+                }
+              } else if(charConv(convArg1, convArg2, convArg3) == midlarArr[4]) { //ACEの場合
+                if(popSum(6, 5, 10) <= 30) {
+                  console.log('中荒れ');
+                } else {
+                  console.log('大荒れ');
+                }
+              } else { ////AEE,ABD,ACCの場合
+                if(popSum(6, 5, 10) <= 22) {
+                  console.log('中荒れ');
+                } else {
+                  console.log('大荒れ');
+                }
+              }
+            } else {
+              dirtArr.push('\t' + 'class="displayTrust">' + '信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)));
+              turfdirtArr.push('\t' + 'class="displayTrust">' + '信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)));
+            }
             break;
         }
-      }
-  
-      turfPopArr.forEach((pop, num) => {
-        switch(num) {
-          case 0:
-            convArg1 = pop;
-            break;
-          case 1:
-            convArg2 = pop;
-            break;
-          case 2:
-            convArg3 = pop;
-            break;
-        }
-      });
-
-      if(charCheck(charConv(convArg1, convArg2, convArg3)) == 'blanchFlow') {
-        if(charConv(convArg1, convArg2, convArg3) == midlarArr[0]) {  //BBCの場合
-          if(popSum(6, 5, 10) <= 21) {
-            console.log('中荒れ');
-          } else {
-            console.log('大荒れ');
-          }
-        } else if(charConv(convArg1, convArg2, convArg3) == midlarArr[4]) { //ACEの場合
-          if(popSum(6, 5, 10) <= 30) {
-            console.log('中荒れ');
-          } else {
-            console.log('大荒れ');
-          }
-        } else { ////AEE,ABD,ACCの場合
-          if(popSum(6, 5, 10) <= 22) {
-            console.log('中荒れ');
-          } else {
-            console.log('大荒れ');
-          }
-        }
-      } else {
-        turfArr.push('信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)));
       }
 
       //HTML画面出力
@@ -272,19 +349,19 @@ document.getElementById('search').addEventListener('click', () => {
         case 'turfdirt':
           //全レース
           turfdirtArr.forEach((turfdirt) => {
-            resultHtml += '<li>' + turfdirt + '</li>';
+            resultHtml += '<li' + turfdirt + '</li>';
           })
           break;
         case 'turf':
           // 芝レース
           turfArr.forEach((turf) => {
-            resultHtml += '<li>' + turf + '</li>';
+            resultHtml += '<li' + turf + '</li>';
           })
           break;
         case 'dirt':
           // ダートレース
           dirtArr.forEach((dirt) => {
-            resultHtml += '<li>' + dirt + '</li>';
+            resultHtml += '<li' + dirt + '</li>';
           })
           break;
       }
