@@ -123,6 +123,8 @@ document.getElementById('search').addEventListener('click', () => {
       let displayPopular = '';
       let displayCorner = '';
       let displayPosition = '位置取り：';
+      const HEIG_PACE = 48.0;
+      const SLOW_PACE = 56.0;
       let displayPci = '';
       let displayTrust = '';
       let convArg1 = 0;
@@ -139,7 +141,7 @@ document.getElementById('search').addEventListener('click', () => {
         displayTotal = splitRaceDate[turf][11] + '頭';
         displayCorner = '4角：' + splitRaceDate[turf][9] + '\n' + splitRaceDate[turf][21] + '\n' + splitRaceDate[turf][33];
         displayPopular = '人気：' + splitRaceDate[turf][8] + '\n' + splitRaceDate[turf][20] + '\n' + splitRaceDate[turf][32];
-        displayPci = 'PCI：' + ((parseInt(splitRaceDate[turf][10]) + parseInt(splitRaceDate[turf][22]) + parseInt(splitRaceDate[turf][34])) / 3).toFixed(2);
+        calcPci = ((parseInt(splitRaceDate[turf][10]) + parseInt(splitRaceDate[turf][22]) + parseInt(splitRaceDate[turf][34])) / 3).toFixed(2);
         positionArr = [splitRaceDate[turf][9], splitRaceDate[turf][21], splitRaceDate[turf][33]];
         calcPosition = ((splitRaceDate[turf][11] - 1) / 3).toFixed(0);
         positionFront = parseInt(calcPosition);
@@ -170,7 +172,6 @@ document.getElementById('search').addEventListener('click', () => {
             turfArr.push('\t' + 'class="displayPopular">' + displayPopular);
             turfArr.push('\t' + 'class="displayCorner">' + displayCorner);
             turfArr.push('\t' + 'class="displayPosition">' + displayPosition);
-            turfArr.push('\t' + 'class="displayPci">' + displayPci);
             turfdirtArr.push('\t' + 'class="displayRaceNum">' + displayRaceNum);
             turfdirtArr.push('\t' + 'class="displayClass">' + displayClass);
             turfdirtArr.push('\t' + 'class="displayTurf">' + displayTurf);
@@ -180,6 +181,16 @@ document.getElementById('search').addEventListener('click', () => {
             turfdirtArr.push('\t' + 'class="displayPopular">' + displayPopular);
             turfdirtArr.push('\t' + 'class="displayCorner">' + displayCorner);
             turfdirtArr.push('\t' + 'class="displayPosition">' + displayPosition);
+
+            //ペース計算
+            if(calcPci <= HEIG_PACE) {
+              displayPci = 'Hペース(後方有利)'
+            } else if (calcPci <= SLOW_PACE) {
+              displayPci = 'Sペース(先行有利)'
+            } else {
+              displayPci = 'Mペース(前後同等)'
+            }
+            turfArr.push('\t' + 'class="displayPci">' + displayPci);
             turfdirtArr.push('\t' + 'class="displayPci">' + displayPci);
 
             //人気計算用配列
@@ -266,7 +277,6 @@ document.getElementById('search').addEventListener('click', () => {
             dirtArr.push('\t' + 'class="displayPopular">' + displayPopular);
             dirtArr.push('\t' + 'class="displayCorner">' + displayCorner);
             dirtArr.push('\t' + 'class="displayPosition">' + displayPosition);
-            dirtArr.push('\t' + 'class="displayPci">' + displayPci);
             turfdirtArr.push('\t' + 'class="displayRaceNum">' + displayRaceNum);
             turfdirtArr.push('\t' + 'class="displayClass">' + displayClass);
             turfdirtArr.push('\t' + 'class="displayTurf">' + displayTurf);
@@ -276,6 +286,16 @@ document.getElementById('search').addEventListener('click', () => {
             turfdirtArr.push('\t' + 'class="displayPopular">' + displayPopular);
             turfdirtArr.push('\t' + 'class="displayCorner">' + displayCorner);
             turfdirtArr.push('\t' + 'class="displayPosition">' + displayPosition);
+
+            //ペース計算
+            if(calcPci <= HEIG_PACE) {
+              displayPci = 'Hペース(後方有利)'
+            } else if (calcPci <= SLOW_PACE) {
+              displayPci = 'Sペース(先行有利)'
+            } else {
+              displayPci = 'Mペース(前後同等)'
+            }
+            dirtArr.push('\t' + 'class="displayPci">' + displayPci);
             turfdirtArr.push('\t' + 'class="displayPci">' + displayPci);
 
             //人気計算用配列
