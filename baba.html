@@ -39,7 +39,7 @@
               </select>
             </div>
             <div id="field">
-              <input type="radio" name="fieldChoice" value="turfDirt" checked>芝とダート
+              <input type="radio" name="fieldChoice" value="turfdirt" checked>芝とダート
               <input type="radio" name="fieldChoice" value="turf">芝
               <input type="radio" name="fieldChoice" value="dirt">ダート
             </div>
@@ -72,19 +72,17 @@
             </div>
           </form>
           <button id="search" type="submit" form="trend">検索</button>
-          <button id="test" type="submit" form="trend">TEST</button>
         </section>
         <section id="display">
           <p>検索結果</p>
           <div id="result">
             <p><span id="trendDay"></span>&nbsp;<span id="trendField"></span>&nbsp;<span id="trendDistance"></span></p>
-            <p id="trendResult"></p>
+            <div id="resultHtml"></div>
           </div>
         </section>
       </div>
-      <script src="jquery-3.5.1.min.js"></script>
-      <script type="text/javascript" src="baba.js"></script>
-      <script type="text/javascript" src="trust.js"></script>
+      <script type="text/javascript" src="babaMain.js"></script>
+      <script type="text/javascript" src="charConv.js"></script>
     </body>
     <footer>
       <p>Copyright © hogehoge.com</p>
