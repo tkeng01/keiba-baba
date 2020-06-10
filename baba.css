@@ -35,4 +35,16 @@ body {
 
 #result > p {
   padding: 10px;
+<<<<<<< Updated upstream
+=======
+}
+
+.displayInfo {
+  margin: 0 10px;
+  padding: 5px
+}
+
+.displayInfo > li {
+  list-style: none;
+>>>>>>> Stashed changes
 }
