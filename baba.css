@@ -25,7 +25,7 @@ body {
 
 #result {
   height: auto;
-  width: 500px;
+  width: 800px;
   background-color: paleturquoise;
   border-radius: 7px;
 }
@@ -35,9 +35,20 @@ body {
   padding: 10px;
 }
 
+.oneRaceInfo {
+  margin: 0 0 10px 0;
+}
+
 .displayInfo {
-  margin: 0 10px;
-  padding: 5px
+  margin: 0;
+  padding: 0;
+  display: table-cell;
+  width: 150px;
+  text-align: center;
+  vertical-align: middle;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  border-left: 1px solid;
 }
 
 .displayInfo > li {

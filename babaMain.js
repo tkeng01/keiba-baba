@@ -164,7 +164,7 @@ document.getElementById('search').addEventListener('click', () => {
             });
 
             //displayInfoで囲む
-            turfArr.push('<ul class="displayInfo">');
+            turfArr.push('<div class="oneRaceInfo">' + '<ul class="displayInfo">');
             turfArr.push('<li>' + displayRaceNum + '</li>');
             turfArr.push('<li>' + displayClass + '</li>');
             turfArr.push('</ul>');
@@ -180,7 +180,7 @@ document.getElementById('search').addEventListener('click', () => {
             turfArr.push('<li>' + displayPosition + '</li>');
             turfArr.push('</ul>');
             //--------
-            turfdirtArr.push('<ul class="displayInfo">');
+            turfdirtArr.push('<div class="oneRaceInfo">' + '<ul class="displayInfo">');
             turfdirtArr.push('<li>' + displayRaceNum + '</li>');
             turfdirtArr.push('<li>' + displayClass + '</li>');
             turfdirtArr.push('</ul>');
@@ -270,10 +270,10 @@ document.getElementById('search').addEventListener('click', () => {
             } else {
               turfArr.push('<ul class="displayInfo">');
               turfArr.push('<li>' + '信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)) + '</li>');
-              turfArr.push('</ul>');
+              turfArr.push('</ul>' + '</div>');
               turfdirtArr.push('<ul class="displayInfo">');
               turfdirtArr.push('<li>' + '信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)) + '</li>');
-              turfdirtArr.push('</ul>');
+              turfdirtArr.push('</ul>' + '</div>');
             }
             break;
           case 'ダ':
@@ -290,7 +290,7 @@ document.getElementById('search').addEventListener('click', () => {
               }
             });
 
-            dirtArr.push('<ul class="displayInfo">');
+            dirtArr.push('<div class="oneRaceInfo">' + '<ul class="displayInfo">');
             dirtArr.push('<li>' + displayRaceNum + '</li>');
             dirtArr.push('<li>' + displayClass + '</li>');
             dirtArr.push('</ul>');
@@ -306,7 +306,7 @@ document.getElementById('search').addEventListener('click', () => {
             dirtArr.push('<li>' + displayPosition + '</li>');
             dirtArr.push('</ul>');
             //--------
-            turfdirtArr.push('<ul class="displayInfo">');
+            turfdirtArr.push('<div class="oneRaceInfo">' + '<ul class="displayInfo">');
             turfdirtArr.push('<li>' + displayRaceNum + '</li>');
             turfdirtArr.push('<li>' + displayClass + '</li>');
             turfdirtArr.push('</ul>');
@@ -396,10 +396,10 @@ document.getElementById('search').addEventListener('click', () => {
             } else {
               dirtArr.push('<ul class="displayInfo">');
               dirtArr.push('<li>' + '信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)) + '</li>');
-              dirtArr.push('</ul>');
+              dirtArr.push('</ul>' + '</div>');
               turfdirtArr.push('<ul class="displayInfo">');
               turfdirtArr.push('<li>' + '信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)) + '</li>');
-              turfdirtArr.push('</ul>');
+              turfdirtArr.push('</ul>' + '</div>');
             }
             break;
         }
