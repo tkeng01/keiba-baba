@@ -13,10 +13,7 @@ body {
 }
 
 #top p {
-  margin: 0;
-  position: fixed;
-  top: 14px;
-  left: 55px;
+  margin: 10px;
 }
 
   input[type="date"]::-webkit-inner-spin-button{
@@ -27,16 +24,15 @@ body {
   }
 
 #result {
-  height: 200px;
+  height: auto;
   width: 500px;
   background-color: paleturquoise;
-  border-radius: 15px;
+  border-radius: 7px;
 }
 
 #result > p {
+  margin: 5px;
   padding: 10px;
-<<<<<<< Updated upstream
-=======
 }
 
 .displayInfo {
@@ -46,5 +42,9 @@ body {
 
 .displayInfo > li {
   list-style: none;
->>>>>>> Stashed changes
+}
+
+#resultHtml > ul {
+  margin: -15px;
+  list-style: none;
 }
