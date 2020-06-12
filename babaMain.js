@@ -268,10 +268,10 @@ document.getElementById('search').addEventListener('click', () => {
                 }
               }
             } else {
-              turfArr.push('<ul class="displayInfo">');
+              turfArr.push('<ul class="displayInfoEnd">');
               turfArr.push('<li>' + '信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)) + '</li>');
               turfArr.push('</ul>' + '</div>');
-              turfdirtArr.push('<ul class="displayInfo">');
+              turfdirtArr.push('<ul class="displayInfoEnd">');
               turfdirtArr.push('<li>' + '信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)) + '</li>');
               turfdirtArr.push('</ul>' + '</div>');
             }
@@ -394,10 +394,10 @@ document.getElementById('search').addEventListener('click', () => {
                 }
               }
             } else {
-              dirtArr.push('<ul class="displayInfo">');
+              dirtArr.push('<ul class="displayInfoEnd">');
               dirtArr.push('<li>' + '信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)) + '</li>');
               dirtArr.push('</ul>' + '</div>');
-              turfdirtArr.push('<ul class="displayInfo">');
+              turfdirtArr.push('<ul class="displayInfoEnd">');
               turfdirtArr.push('<li>' + '信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)) + '</li>');
               turfdirtArr.push('</ul>' + '</div>');
             }
@@ -435,20 +435,3 @@ document.getElementById('search').addEventListener('click', () => {
     displayCounter = 0;
   }
 });
-
-// function testSpread(json) {
-//   const testSpread = new XMLHttpRequest();
-//   testSpread.open('GET', 'https://script.google.com/macros/s/AKfycbwDZSXsZRDzV3-R5_XavC37-LEAohi2tz0Ok48NHtW_R1j6fxtG/exec', true);
-//   testSpread.responseType = 'json';
-//   testSpread.send();
-//   testSpread.onload = function() {
-//     let yamane = testSpread.response;
-//     json(yamane);
-//   }
-// }
-
-// document.getElementById('test').addEventListener('click', () => {
-//   testSpread(function(yamane) {
-//     console.log(yamane);
-//   });
-// });
