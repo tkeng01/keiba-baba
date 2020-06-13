@@ -163,24 +163,38 @@ document.getElementById('search').addEventListener('click', () => {
               }
             });
 
-            turfArr.push('\t' + 'class="displayRaceNum">' + displayRaceNum);
-            turfArr.push('\t' + 'class="displayClass">' + displayClass);
-            turfArr.push('\t' + 'class="displayTurf">' + displayTurf);
-            turfArr.push('\t' + 'class="displayDistance">' + displayDistance);
-            turfArr.push('\t' + 'class="displayTotal">' + displayTotal);
-            turfArr.push('\t' + 'class="displayCondition">' + displayCondition);
-            turfArr.push('\t' + 'class="displayPopular">' + displayPopular);
-            turfArr.push('\t' + 'class="displayCorner">' + displayCorner);
-            turfArr.push('\t' + 'class="displayPosition">' + displayPosition);
-            turfdirtArr.push('\t' + 'class="displayRaceNum">' + displayRaceNum);
-            turfdirtArr.push('\t' + 'class="displayClass">' + displayClass);
-            turfdirtArr.push('\t' + 'class="displayTurf">' + displayTurf);
-            turfdirtArr.push('\t' + 'class="displayDistance">' + displayDistance);
-            turfdirtArr.push('\t' + 'class="displayTotal">' + displayTotal);
-            turfdirtArr.push('\t' + 'class="displayCondition">' + displayCondition);
-            turfdirtArr.push('\t' + 'class="displayPopular">' + displayPopular);
-            turfdirtArr.push('\t' + 'class="displayCorner">' + displayCorner);
-            turfdirtArr.push('\t' + 'class="displayPosition">' + displayPosition);
+            //displayInfoで囲む
+            turfArr.push('<div class="oneRaceInfo">' + '<ul class="displayInfo">');
+            turfArr.push('<li>' + displayRaceNum + '</li>');
+            turfArr.push('<li>' + displayClass + '</li>');
+            turfArr.push('</ul>');
+            turfArr.push('<ul class="displayInfo">');
+            turfArr.push('<li>' + displayTurf + '</li>');
+            turfArr.push('<li>' + displayTotal + '</li>');
+            turfArr.push('<li>' + displayDistance + '</li>');
+            turfArr.push('<li>' + displayCondition + '</li>');
+            turfArr.push('</ul>');
+            turfArr.push('<ul class="displayInfo">');
+            turfArr.push('<li>' + displayPopular + '</li>');
+            turfArr.push('<li>' + displayCorner + '</li>');
+            turfArr.push('<li>' + displayPosition + '</li>');
+            turfArr.push('</ul>');
+            //--------
+            turfdirtArr.push('<div class="oneRaceInfo">' + '<ul class="displayInfo">');
+            turfdirtArr.push('<li>' + displayRaceNum + '</li>');
+            turfdirtArr.push('<li>' + displayClass + '</li>');
+            turfdirtArr.push('</ul>');
+            turfdirtArr.push('<ul class="displayInfo">');
+            turfdirtArr.push('<li>' + displayTurf + '</li>');
+            turfdirtArr.push('<li>' + displayTotal + '</li>');
+            turfdirtArr.push('<li>' + displayDistance + '</li>');
+            turfdirtArr.push('<li>' + displayCondition + '</li>');
+            turfdirtArr.push('</ul>');
+            turfdirtArr.push('<ul class="displayInfo">');
+            turfdirtArr.push('<li>' + displayPopular + '</li>');
+            turfdirtArr.push('<li>' + displayCorner + '</li>');
+            turfdirtArr.push('<li>' + displayPosition + '</li>');
+            turfdirtArr.push('</ul>');
 
             //ペース計算
             if(calcPci <= HEIG_PACE) {
@@ -190,8 +204,12 @@ document.getElementById('search').addEventListener('click', () => {
             } else {
               displayPci = 'Mペース(前後同等)'
             }
-            turfArr.push('\t' + 'class="displayPci">' + displayPci);
-            turfdirtArr.push('\t' + 'class="displayPci">' + displayPci);
+            turfArr.push('<ul class="displayInfo">');
+            turfArr.push('<li>' + displayPci + '</li>');
+            turfArr.push('</ul>');
+            turfdirtArr.push('<ul class="displayInfo">');
+            turfdirtArr.push('<li>' + displayPci + '</li>');
+            turfdirtArr.push('</ul>');
 
             //人気計算用配列
             turfPopArr.push(splitRaceDate[turf][8]);
@@ -250,8 +268,12 @@ document.getElementById('search').addEventListener('click', () => {
                 }
               }
             } else {
-              turfArr.push('\t' + 'class="displayTrust">' + '信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)));
-              turfdirtArr.push('\t' + 'class="displayTrust">' + '信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)));
+              turfArr.push('<ul class="displayInfoEnd">');
+              turfArr.push('<li>' + '信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)) + '</li>');
+              turfArr.push('</ul>' + '</div>');
+              turfdirtArr.push('<ul class="displayInfoEnd">');
+              turfdirtArr.push('<li>' + '信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)) + '</li>');
+              turfdirtArr.push('</ul>' + '</div>');
             }
             break;
           case 'ダ':
@@ -268,24 +290,37 @@ document.getElementById('search').addEventListener('click', () => {
               }
             });
 
-            dirtArr.push('\t' + 'class="displayRaceNum">' + displayRaceNum);
-            dirtArr.push('\t' + 'class="displayClass">' + displayClass);
-            dirtArr.push('\t' + 'class="displayTurf">' + displayTurf);
-            dirtArr.push('\t' + 'class="displayDistance">' + displayDistance);
-            dirtArr.push('\t' + 'class="displayTotal">' + displayTotal);
-            dirtArr.push('\t' + 'class="displayCondition">' + displayCondition);
-            dirtArr.push('\t' + 'class="displayPopular">' + displayPopular);
-            dirtArr.push('\t' + 'class="displayCorner">' + displayCorner);
-            dirtArr.push('\t' + 'class="displayPosition">' + displayPosition);
-            turfdirtArr.push('\t' + 'class="displayRaceNum">' + displayRaceNum);
-            turfdirtArr.push('\t' + 'class="displayClass">' + displayClass);
-            turfdirtArr.push('\t' + 'class="displayTurf">' + displayTurf);
-            turfdirtArr.push('\t' + 'class="displayDistance">' + displayDistance);
-            turfdirtArr.push('\t' + 'class="displayTotal">' + displayTotal);
-            turfdirtArr.push('\t' + 'class="displayCondition">' + displayCondition);
-            turfdirtArr.push('\t' + 'class="displayPopular">' + displayPopular);
-            turfdirtArr.push('\t' + 'class="displayCorner">' + displayCorner);
-            turfdirtArr.push('\t' + 'class="displayPosition">' + displayPosition);
+            dirtArr.push('<div class="oneRaceInfo">' + '<ul class="displayInfo">');
+            dirtArr.push('<li>' + displayRaceNum + '</li>');
+            dirtArr.push('<li>' + displayClass + '</li>');
+            dirtArr.push('</ul>');
+            dirtArr.push('<ul class="displayInfo">');
+            dirtArr.push('<li>' + displayTurf + '</li>');
+            dirtArr.push('<li>' + displayTotal + '</li>');
+            dirtArr.push('<li>' + displayDistance + '</li>');
+            dirtArr.push('<li>' + displayCondition + '</li>');
+            dirtArr.push('</ul>');
+            dirtArr.push('<ul class="displayInfo">');
+            dirtArr.push('<li>' + displayPopular + '</li>');
+            dirtArr.push('<li>' + displayCorner + '</li>');
+            dirtArr.push('<li>' + displayPosition + '</li>');
+            dirtArr.push('</ul>');
+            //--------
+            turfdirtArr.push('<div class="oneRaceInfo">' + '<ul class="displayInfo">');
+            turfdirtArr.push('<li>' + displayRaceNum + '</li>');
+            turfdirtArr.push('<li>' + displayClass + '</li>');
+            turfdirtArr.push('</ul>');
+            turfdirtArr.push('<ul class="displayInfo">');
+            turfdirtArr.push('<li>' + displayTurf + '</li>');
+            turfdirtArr.push('<li>' + displayTotal + '</li>');
+            turfdirtArr.push('<li>' + displayDistance + '</li>');
+            turfdirtArr.push('<li>' + displayCondition + '</li>');
+            turfdirtArr.push('</ul>');
+            turfdirtArr.push('<ul class="displayInfo">');
+            turfdirtArr.push('<li>' + displayPopular + '</li>');
+            turfdirtArr.push('<li>' + displayCorner + '</li>');
+            turfdirtArr.push('<li>' + displayPosition + '</li>');
+            turfdirtArr.push('</ul>');
 
             //ペース計算
             if(calcPci <= HEIG_PACE) {
@@ -295,8 +330,12 @@ document.getElementById('search').addEventListener('click', () => {
             } else {
               displayPci = 'Mペース(前後同等)'
             }
-            dirtArr.push('\t' + 'class="displayPci">' + displayPci);
-            turfdirtArr.push('\t' + 'class="displayPci">' + displayPci);
+            dirtArr.push('<ul class="displayInfo">');
+            dirtArr.push('<li>' + displayPci + '</li>');
+            dirtArr.push('</ul>');
+            turfdirtArr.push('<ul class="displayInfo">');
+            turfdirtArr.push('<li>' + displayPci + '</li>');
+            turfdirtArr.push('</ul>');
 
             //人気計算用配列
             dirtPopArr.push(splitRaceDate[turf][8]);
@@ -355,8 +394,12 @@ document.getElementById('search').addEventListener('click', () => {
                 }
               }
             } else {
-              dirtArr.push('\t' + 'class="displayTrust">' + '信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)));
-              turfdirtArr.push('\t' + 'class="displayTrust">' + '信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)));
+              dirtArr.push('<ul class="displayInfoEnd">');
+              dirtArr.push('<li>' + '信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)) + '</li>');
+              dirtArr.push('</ul>' + '</div>');
+              turfdirtArr.push('<ul class="displayInfoEnd">');
+              turfdirtArr.push('<li>' + '信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)) + '</li>');
+              turfdirtArr.push('</ul>' + '</div>');
             }
             break;
         }
@@ -364,48 +407,31 @@ document.getElementById('search').addEventListener('click', () => {
 
       //HTML画面出力
       let choiceField = trend.fieldChoice.value;
-      let resultHtml = '<ul>';
+      let resultHtml = '<div>';
       switch(choiceField) {
         case 'turfdirt':
           //全レース
           turfdirtArr.forEach((turfdirt) => {
-            resultHtml += '<li' + turfdirt + '</li>';
+            resultHtml += turfdirt;
           })
           break;
         case 'turf':
           // 芝レース
           turfArr.forEach((turf) => {
-            resultHtml += '<li' + turf + '</li>';
+            resultHtml += turf;
           })
           break;
         case 'dirt':
           // ダートレース
           dirtArr.forEach((dirt) => {
-            resultHtml += '<li' + dirt + '</li>';
+            resultHtml += dirt;
           })
           break;
       }
-      resultHtml += '</ul>';
+      resultHtml += '</div>';
       document.getElementById('resultHtml').innerHTML = resultHtml;
     });
   } else {
     displayCounter = 0;
   }
 });
-
-// function testSpread(json) {
-//   const testSpread = new XMLHttpRequest();
-//   testSpread.open('GET', 'https://script.google.com/macros/s/AKfycbwDZSXsZRDzV3-R5_XavC37-LEAohi2tz0Ok48NHtW_R1j6fxtG/exec', true);
-//   testSpread.responseType = 'json';
-//   testSpread.send();
-//   testSpread.onload = function() {
-//     let yamane = testSpread.response;
-//     json(yamane);
-//   }
-// }
-
-// document.getElementById('test').addEventListener('click', () => {
-//   testSpread(function(yamane) {
-//     console.log(yamane);
-//   });
-// });
