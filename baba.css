@@ -13,10 +13,7 @@ body {
 }
 
 #top p {
-  margin: 0;
-  position: fixed;
-  top: 14px;
-  left: 55px;
+  margin: 10px;
 }
 
   input[type="date"]::-webkit-inner-spin-button{
@@ -27,12 +24,49 @@ body {
   }
 
 #result {
-  height: 200px;
-  width: 500px;
+  padding: 0 15px 20px 15px;
+  height: auto;
+  width: 800px;
   background-color: paleturquoise;
-  border-radius: 15px;
+  border-radius: 7px;
 }
 
 #result > p {
+  margin: 5px;
   padding: 10px;
+}
+
+.oneRaceInfo {
+  margin: 0 0 10px 0;
+}
+
+.displayInfo, .displayInfoEnd {
+  margin: 0;
+  padding: 0;
+  display: table-cell;
+  width: 150px;
+  text-align: center;
+  vertical-align: middle;
+  border-top: 1px solid #696969;
+  border-bottom: 1px solid #696969;
+  border-left: 1px solid #696969;
+}
+
+.displayInfo > li {
+  list-style: none;
+  font-size: 12px;
+}
+
+.displayInfoEnd {
+  border-right: 1px solid #696969;
+  font-size: 12px;
+}
+
+.displayInfoEnd > li {
+  list-style: none;
+}
+
+#resultHtml > ul {
+  margin: -15px;
+  list-style: none;
 }
