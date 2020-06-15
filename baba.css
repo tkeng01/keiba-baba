@@ -24,8 +24,9 @@ body {
   }
 
 #result {
+  padding: 0 15px 20px 15px;
   height: auto;
-  width: 500px;
+  width: 800px;
   background-color: paleturquoise;
   border-radius: 7px;
 }
@@ -35,8 +36,34 @@ body {
   padding: 10px;
 }
 
-.displayRaceNum, .displayClass {
-  display: inline-block;
+.oneRaceInfo {
+  margin: 0 0 10px 0;
+}
+
+.displayInfo, .displayInfoEnd {
+  margin: 0;
+  padding: 0;
+  display: table-cell;
+  width: 150px;
+  text-align: center;
+  vertical-align: middle;
+  border-top: 1px solid #696969;
+  border-bottom: 1px solid #696969;
+  border-left: 1px solid #696969;
+}
+
+.displayInfo > li {
+  list-style: none;
+  font-size: 12px;
+}
+
+.displayInfoEnd {
+  border-right: 1px solid #696969;
+  font-size: 12px;
+}
+
+.displayInfoEnd > li {
+  list-style: none;
 }
 
 #resultHtml > ul {
