@@ -10,7 +10,7 @@ const GET_TODAY = `${GET_YEAR}${GET_MONTH}${GET_DAY}`;
 //スプレッドシートjson取得
 function callSpread(keibaData) {
   const callSpread = new XMLHttpRequest();
-  callSpread.open('GET', 'https://script.google.com/macros/s/AKfycbw9jVHMTWumDtzQ0BObOqLoEUbvWlMm1JUzKDGTbnxiYofugew/exec', true);
+  callSpread.open('GET', 'https://script.google.com/macros/s/AKfycbwDZSXsZRDzV3-R5_XavC37-LEAohi2tz0Ok48NHtW_R1j6fxtG/exec', true);
   callSpread.responseType = 'json';
   callSpread.send();
   callSpread.onload = function() {
