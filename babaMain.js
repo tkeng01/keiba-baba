@@ -127,6 +127,7 @@ document.getElementById('search').addEventListener('click', () => {
       const SLOW_PACE = 56.0;
       let displayPci = '';
       let displayTrust = '';
+      let convArgArr = [];
       let convArg1 = 0;
       let convArg2 = 0;
       let convArg3 = 0;
@@ -197,51 +198,50 @@ document.getElementById('search').addEventListener('click', () => {
         positionCenter = parseInt(calcPosition * 2);
 
         //人気配列関数
-        function popArrFunc(popArrName) {
-          popArrName.push(splitRaceDate[turf][8]);
-          popArrName.push(splitRaceDate[turf][20]);
-          popArrName.push(splitRaceDate[turf][32]);
-
-          popArrName.forEach((pop, num) => {
-            switch(num) {
-              case 0:
-                convArg1 = pop;
-                break;
-              case 1:
-                convArg2 = pop;
-                break;
-              case 2:
-                convArg3 = pop;
-                break;
-            }
-          });
+        function popArrFunc() {
+          convArg1 = splitRaceDate[turf][8];
+          convArg2 = splitRaceDate[turf][20];
+          convArg3 = splitRaceDate[turf][32];
+          return [convArg1, convArg2, convArg3];
         }
 
         //信頼度計算関数
         function trustCalcFunc(arrName) {
-          if(charCheck(charConv(convArg1, convArg2, convArg3)) == 'blanchFlow') {
-            if(charConv(convArg1, convArg2, convArg3) == midlarArr[0]) {  //BBCの場合
-              if(popSum(6, 5, 10) <= 21) {
-                console.log('中荒れ');
+          function blanchMiddleFunc() {
+            arrName.push('<ul class="displayInfoEnd">');
+            arrName.push('<li>' + '信頼度：中' + '</li>');
+            arrName.push('</ul>' + '</div>');
+          }
+
+          function blanchHighFunc() {
+            arrName.push('<ul class="displayInfoEnd">');
+            arrName.push('<li>' + '信頼度：高' + '</li>');
+            arrName.push('</ul>' + '</div>');
+          }
+
+          if(charCheck(charConv(...popArrFunc())) == 'blanchFlow') {
+            if(charConv(...popArrFunc()) == midlarArr[0]) {  //BBCの場合
+              if(popSum(...popArrFunc()) <= 21) {
+                blanchMiddleFunc();
               } else {
-                console.log('大荒れ');
+                blanchHighFunc();
               }
-            } else if(charConv(convArg1, convArg2, convArg3) == midlarArr[4]) { //ACEの場合
-              if(popSum(6, 5, 10) <= 30) {
-                console.log('中荒れ');
+            } else if(charConv(...popArrFunc()) == midlarArr[4]) { //ACEの場合
+              if(popSum(...popArrFunc()) <= 30) {
+                blanchMiddleFunc();
               } else {
-                console.log('大荒れ');
+                blanchHighFunc();
               }
-            } else { ////AEE,ABD,ACCの場合
-              if(popSum(6, 5, 10) <= 22) {
-                console.log('中荒れ');
+            } else { //AEE,ABD,ACCの場合
+              if(popSum(...popArrFunc()) <= 22) {
+                blanchMiddleFunc();
               } else {
-                console.log('大荒れ');
+                blanchHighFunc();
               }
             }
           } else {
             arrName.push('<ul class="displayInfoEnd">');
-            arrName.push('<li>' + '信頼度：' + charCheck(charConv(convArg1, convArg2, convArg3)) + '</li>');
+            arrName.push('<li>' + '信頼度：' + charCheck(charConv(...popArrFunc())) + '</li>');
             arrName.push('</ul>' + '</div>');
           }
         }
@@ -253,8 +253,7 @@ document.getElementById('search').addEventListener('click', () => {
             arrPushFunc(turfdirtArr);
             paceCalcFunc(turfArr);
             paceCalcFunc(turfdirtArr);
-            popArrFunc(turfPopArr);
-            popArrFunc(turfdirtPopArr);
+            popArrFunc();
             trustCalcFunc(turfArr);
             trustCalcFunc(turfdirtArr);
             break;
@@ -264,8 +263,7 @@ document.getElementById('search').addEventListener('click', () => {
             arrPushFunc(turfdirtArr);
             paceCalcFunc(dirtArr);
             paceCalcFunc(turfdirtArr);
-            popArrFunc(dirtPopArr);
-            popArrFunc(turfdirtPopArr);
+            popArrFunc();
             trustCalcFunc(dirtArr);
             trustCalcFunc(turfdirtArr);
             break;
