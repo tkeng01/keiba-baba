@@ -46,9 +46,9 @@ const DISTANCE_LENGTH = trend.distanceChoice.length;
 document.getElementById('search').addEventListener('click', () => {
   let displayCounter = 0;
   
+  // 日付
   let displayDay = document.getElementById('dayChoice').value;
   let cutDate = '';
-
   if(displayDay == false) {
     alert('日付を選択してください');
   } else {
@@ -65,6 +65,7 @@ document.getElementById('search').addEventListener('click', () => {
     }
   }
   
+  // 開催場
   let displayLocation = '';
   for(let i = 0; i <= LOCATION_LENGTH - 1; i++) {
     if(trend.locationChoice[i].selected == true) {
@@ -76,6 +77,9 @@ document.getElementById('search').addEventListener('click', () => {
       }
     }
   }
+
+  // 距離
+  let choiceDistance = document.getElementById('distanceChoice').value;
 
   //2だった場合は正常処理
   if(displayCounter == 2) { 
@@ -131,6 +135,7 @@ document.getElementById('search').addEventListener('click', () => {
       let convArg1 = 0;
       let convArg2 = 0;
       let convArg3 = 0;
+      let dataNullCounter = 0;
 
       //位置取り計算関数
       function positionCalcFunc() {
@@ -245,28 +250,47 @@ document.getElementById('search').addEventListener('click', () => {
             arrName.push('</ul>' + '</div>');
           }
         }
-        
-        switch(displayTurf) {
-          case '芝':
-            positionCalcFunc();
-            arrPushFunc(turfArr);
-            arrPushFunc(turfdirtArr);
-            paceCalcFunc(turfArr);
-            paceCalcFunc(turfdirtArr);
-            popArrFunc();
-            trustCalcFunc(turfArr);
-            trustCalcFunc(turfdirtArr);
-            break;
-          case 'ダ':
-            positionCalcFunc();
-            arrPushFunc(dirtArr);
-            arrPushFunc(turfdirtArr);
-            paceCalcFunc(dirtArr);
-            paceCalcFunc(turfdirtArr);
-            popArrFunc();
-            trustCalcFunc(dirtArr);
-            trustCalcFunc(turfdirtArr);
-            break;
+
+        // 最終結果関数
+        function resultFunc() {
+          switch(displayTurf) {
+            case '芝':
+              positionCalcFunc();
+              arrPushFunc(turfArr);
+              arrPushFunc(turfdirtArr);
+              paceCalcFunc(turfArr);
+              paceCalcFunc(turfdirtArr);
+              popArrFunc();
+              trustCalcFunc(turfArr);
+              trustCalcFunc(turfdirtArr);
+              break;
+            case 'ダ':
+              positionCalcFunc();
+              arrPushFunc(dirtArr);
+              arrPushFunc(turfdirtArr);
+              paceCalcFunc(dirtArr);
+              paceCalcFunc(turfdirtArr);
+              popArrFunc();
+              trustCalcFunc(dirtArr);
+              trustCalcFunc(turfdirtArr);
+              break;
+          }
+        }
+
+        if(choiceDistance == 'all') {
+          //全データ出力
+          resultFunc();
+        } else {
+          //距離フィルター
+          if(choiceDistance == splitRaceDate[turf][5]) {
+            resultFunc();
+          } else {
+            // 該当データが無い場合の処理
+            dataNullCounter ++;
+            if(dataNullCounter == splitRaceDate.length) {
+              alert('検索条件に該当するデータが見つかりません');
+            }
+          }
         }
       }
 
