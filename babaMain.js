@@ -91,8 +91,6 @@ document.getElementById('search').addEventListener('click', () => {
       //json全データをチェック
       keibaDataArr.forEach((dayLocatValue) => {
         if(cutDate.slice(-6) == dayLocatValue[0] && displayLocation == dayLocatValue[1]) {
-          document.getElementById('trendDay').textContent = displayDay;
-          document.getElementById('trendField').textContent = displayLocation;
           for(let pullInfo = 0; pullInfo <= ONE_JSON_LENGTH; pullInfo++) {
             pullOutArr.push(dayLocatValue[pullInfo]);
           }
@@ -311,6 +309,8 @@ document.getElementById('search').addEventListener('click', () => {
 
       //HTML画面出力
       let choiceField = trend.fieldChoice.value;
+      document.getElementById('trendDay').textContent = displayDay;
+      document.getElementById('trendField').textContent = displayLocation;
       let resultHtml = '<div>';
       switch(choiceField) {
         case 'turfdirt':
