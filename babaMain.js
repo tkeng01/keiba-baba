@@ -80,9 +80,11 @@ document.getElementById('search').addEventListener('click', () => {
 
   // 距離
   let choiceDistance = document.getElementById('distanceChoice').value;
+  let eventCounter = 0;
+  let breakCheck = 0;
 
   //2だった場合は正常処理
-  if(displayCounter == 2) { 
+  if(displayCounter == 2) {
     callSpread(function(keibaDataArr) {
       let pullOutArr = [];
       const ONE_JSON_LENGTH = 11;
@@ -94,48 +96,14 @@ document.getElementById('search').addEventListener('click', () => {
           for(let pullInfo = 0; pullInfo <= ONE_JSON_LENGTH; pullInfo++) {
             pullOutArr.push(dayLocatValue[pullInfo]);
           }
+        } else {
+          eventCounter ++;
+          if(eventCounter == keibaDataArr.length) {
+            alert(displayDay + 'でのデータは見つかりませんでした');
+            breakCheck = 1;
+          }
         }
       });
-
-      //1Rごと情報を配列に格納
-      let splitRaceDate = [];
-      for(let splitCount = 0; splitCount <= pullOutArr.length; splitCount++) {
-        if(splitCount !== 0 && splitCount % 36 == 0) {
-          splitRaceDate.push(pullOutArr.slice((splitCount - 36), splitCount));
-        }
-      }
-
-      //変数宣言
-      let turfArr = [];
-      let dirtArr = [];
-      let turfdirtArr = [];
-      let positionArr = [];
-      let turfPopArr = [];
-      let dirtPopArr = [];
-      let turfdirtPopArr = [];
-      let calcPosition = '';
-      let positionEscape = 1;
-      let positionFront = '';
-      let positionCenter = '';
-      let calcPci = '';
-      let displayRaceNum = '';
-      let displayClass = '';
-      let displayTurf = '';
-      let displayDistance = '';
-      let displayCondition = '';
-      let displayTotal = '';
-      let displayPopular = '';
-      let displayCorner = '';
-      let displayPosition = '位置取り：';
-      const HEIG_PACE = 48.0;
-      const SLOW_PACE = 56.0;
-      let displayPci = '';
-      let displayTrust = '';
-      let convArgArr = [];
-      let convArg1 = 0;
-      let convArg2 = 0;
-      let convArg3 = 0;
-      let dataNullCounter = 0;
 
       //位置取り計算関数
       function positionCalcFunc() {
@@ -186,7 +154,54 @@ document.getElementById('search').addEventListener('click', () => {
         arrName.push('</ul>');
       }
 
-      for(let turf = 0; turf <= splitRaceDate.length - 1; turf++) {        
+      //1Rごと情報を配列に格納
+      let splitRaceDate = [];
+      for(let splitCount = 0; splitCount <= pullOutArr.length; splitCount++) {
+        if (breakCheck == 1) {
+          break;
+        }
+        if(splitCount !== 0 && splitCount % 36 == 0) {
+          splitRaceDate.push(pullOutArr.slice((splitCount - 36), splitCount));
+        }
+      }
+
+      //変数宣言
+      let turfArr = [];
+      let dirtArr = [];
+      let turfdirtArr = [];
+      let positionArr = [];
+      let turfPopArr = [];
+      let dirtPopArr = [];
+      let turfdirtPopArr = [];
+      let calcPosition = '';
+      let positionEscape = 1;
+      let positionFront = '';
+      let positionCenter = '';
+      let calcPci = '';
+      let displayRaceNum = '';
+      let displayClass = '';
+      let displayTurf = '';
+      let displayDistance = '';
+      let displayCondition = '';
+      let displayTotal = '';
+      let displayPopular = '';
+      let displayCorner = '';
+      let displayPosition = '位置取り：';
+      const HEIG_PACE = 48.0;
+      const SLOW_PACE = 56.0;
+      let displayPci = '';
+      let displayTrust = '';
+      let convArgArr = [];
+      let convArg1 = 0;
+      let convArg2 = 0;
+      let convArg3 = 0;
+      let dataNullCounter = 0;      
+
+      for(let turf = 0; turf <= splitRaceDate.length - 1; turf++) {      
+        if (breakCheck == 1) {
+          break;
+        }  
+
         //値代入
         displayRaceNum = splitRaceDate[turf][2] + 'R';
         displayClass = splitRaceDate[turf][3];
@@ -288,7 +303,7 @@ document.getElementById('search').addEventListener('click', () => {
             // 該当データが無い場合の処理
             dataNullCounter ++;
             if(dataNullCounter == splitRaceDate.length) {
-              alert('検索条件に該当するデータが見つかりません');
+              alert('検索条件に該当するデータが見つかりませんでした');
             }
           }
         }
