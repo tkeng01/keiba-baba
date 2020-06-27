@@ -86,8 +86,47 @@ document.getElementById('search').addEventListener('click', () => {
   //2だった場合は正常処理
   if(displayCounter == 2) {
     callSpread(function(keibaDataArr) {
+      //変数宣言
       let pullOutArr = [];
       const ONE_JSON_LENGTH = 11;
+      let turfArr = [];
+      let dirtArr = [];
+      let turfdirtArr = [];
+      let positionArr = [];
+      let turfPopArr = [];
+      let dirtPopArr = [];
+      let turfdirtPopArr = [];
+      let calcPosition = '';
+      let positionEscape = 1;
+      let positionFront = '';
+      let positionCenter = '';
+      let calcPci = '';
+      let displayRaceNum = '';
+      let displayClass = '';
+      let displayTurf = '';
+      let displayDistance = '';
+      let displayCondition = '';
+      let displayTotal = '';
+      let displayPopular = '';
+      let displayCorner = '';
+      let displayPosition = '位置取り：';
+      const HEIG_PACE = 48.0;
+      const SLOW_PACE = 56.0;
+      let calcPace = '';
+      let displayPace = '';
+      let displayTrust = '';
+      let convArgArr = [];
+      let convArg1 = 0;
+      let convArg2 = 0;
+      let convArg3 = 0;
+      let dataNullCounter = 0; 
+      let paceMessage = '';
+      let positionMessage = '';
+      let positionMessageArr = [];
+      let forwardCounter = 0;
+      let medCounter = 0;
+      let behindCounter = 0;
+
       //json全データをチェック
       keibaDataArr.forEach((dayLocatValue) => {
         if(cutDate.slice(-6) == dayLocatValue[0] && displayLocation == dayLocatValue[1]) {
@@ -141,17 +180,58 @@ document.getElementById('search').addEventListener('click', () => {
       //ペース計算関数
       function paceCalcFunc(arrName) {
         if(calcPci <= HEIG_PACE) {
-          displayPci = 'Hペース(後方有利)'
+          displayPace = 'Hペース(後方有利)';
         } else if (calcPci <= SLOW_PACE) {
-          displayPci = 'Sペース(先行有利)'
+          displayPace = 'Sペース(先行有利)';
         } else {
-          displayPci = 'Mペース(前後同等)'
+          displayPace = 'Mペース(前後同等)';
         }
         arrName.push('<ul class="displayInfo">');
-        arrName.push('<li>' + displayPci + '</li>');
+        arrName.push('<li>' + displayPace + '</li>');
         arrName.push('</ul>');
       }
 
+      function messageFunc() {
+        calcPace = displayPace.substr(0, 1);
+        switch(calcPace) {
+          case 'S':
+            paceMessage = '後方有利';
+            break
+          case 'M':
+            paceMessage = '前後同等';
+            break
+          case 'H':
+            paceMessage = '前方有利';
+            break
+        }
+
+        positionMessageArr = [displayPosition.substr(5, 1), displayPosition.substr(7, 1), displayPosition.substr(9, 1)];
+        positionMessageArr.forEach((position) => {
+          switch(position) {
+            case '逃':
+              forwardCounter ++;
+              break
+            case '先':
+              forwardCounter ++;
+              break
+            case '差':
+              medCounter ++;
+              break
+            case '追':
+              behindCounter ++;
+          }
+        });
+        if(2 <= forwardCounter) {
+          positionMessage = '馬券になった馬は先行が多かった';
+        } else if(2 <= medCounter) {
+          positionMessage = '馬券になった馬は差しが多かった';
+        } else if(2 <= behindCounter) {
+          positionMessage = '馬券になった馬は追込が多かった';
+        } else {
+          positionMessage = '馬券になった馬は前後同等であった';
+        }
+      }
+      
       //1Rごと情報を配列に格納
       let splitRaceDate = [];
       for(let splitCount = 0; splitCount <= pullOutArr.length; splitCount++) {
@@ -163,39 +243,7 @@ document.getElementById('search').addEventListener('click', () => {
         }
       }
 
-      //変数宣言
-      let turfArr = [];
-      let dirtArr = [];
-      let turfdirtArr = [];
-      let positionArr = [];
-      let turfPopArr = [];
-      let dirtPopArr = [];
-      let turfdirtPopArr = [];
-      let calcPosition = '';
-      let positionEscape = 1;
-      let positionFront = '';
-      let positionCenter = '';
-      let calcPci = '';
-      let displayRaceNum = '';
-      let displayClass = '';
-      let displayTurf = '';
-      let displayDistance = '';
-      let displayCondition = '';
-      let displayTotal = '';
-      let displayPopular = '';
-      let displayCorner = '';
-      let displayPosition = '位置取り：';
-      const HEIG_PACE = 48.0;
-      const SLOW_PACE = 56.0;
-      let displayPci = '';
-      let displayTrust = '';
-      let convArgArr = [];
-      let convArg1 = 0;
-      let convArg2 = 0;
-      let convArg3 = 0;
-      let dataNullCounter = 0;      
-
-      for(let turf = 0; turf <= splitRaceDate.length - 1; turf++) {      
+      for(let turf = 0; turf <= splitRaceDate.length - 1; turf++) {
         if (breakCheck == 1) {
           break;
         }  
@@ -276,6 +324,7 @@ document.getElementById('search').addEventListener('click', () => {
               popArrFunc();
               trustCalcFunc(turfArr);
               trustCalcFunc(turfdirtArr);
+              messageFunc();
               break;
             case 'ダ':
               positionCalcFunc();
@@ -286,6 +335,7 @@ document.getElementById('search').addEventListener('click', () => {
               popArrFunc();
               trustCalcFunc(dirtArr);
               trustCalcFunc(turfdirtArr);
+              messageFunc();
               break;
           }
         }
