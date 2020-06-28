@@ -191,7 +191,7 @@ document.getElementById('search').addEventListener('click', () => {
         arrName.push('</ul>');
       }
 
-      function messageFunc() {
+      function messageFunc(arrName) {
         calcPace = displayPace.substr(0, 1);
         switch(calcPace) {
           case 'S':
@@ -204,6 +204,8 @@ document.getElementById('search').addEventListener('click', () => {
             paceMessage = '前方有利';
             break
         }
+        arrName.push('<ul class="displayInfoEnd">');
+        arrName.push('<li>' + paceMessage + '</li>');
 
         positionMessageArr = [displayPosition.substr(5, 1), displayPosition.substr(7, 1), displayPosition.substr(9, 1)];
         positionMessageArr.forEach((position) => {
@@ -230,6 +232,8 @@ document.getElementById('search').addEventListener('click', () => {
         } else {
           positionMessage = '馬券になった馬は前後同等であった';
         }
+        arrName.push('<li>' + positionMessage + '</li>');
+        arrName.push('</ul>' + '</div>');
       }
       
       //1Rごと情報を配列に格納
@@ -274,15 +278,15 @@ document.getElementById('search').addEventListener('click', () => {
         //信頼度計算関数
         function trustCalcFunc(arrName) {
           function blanchMiddleFunc() {
-            arrName.push('<ul class="displayInfoEnd">');
+            arrName.push('<ul class="displayInfo">');
             arrName.push('<li>' + '信頼度：中' + '</li>');
-            arrName.push('</ul>' + '</div>');
+            arrName.push('</ul>');
           }
 
           function blanchHighFunc() {
-            arrName.push('<ul class="displayInfoEnd">');
+            arrName.push('<ul class="displayInfo">');
             arrName.push('<li>' + '信頼度：高' + '</li>');
-            arrName.push('</ul>' + '</div>');
+            arrName.push('</ul>');
           }
 
           if(charCheck(charConv(...popArrFunc())) == 'blanchFlow') {
@@ -306,9 +310,9 @@ document.getElementById('search').addEventListener('click', () => {
               }
             }
           } else {
-            arrName.push('<ul class="displayInfoEnd">');
+            arrName.push('<ul class="displayInfo">');
             arrName.push('<li>' + '信頼度：' + charCheck(charConv(...popArrFunc())) + '</li>');
-            arrName.push('</ul>' + '</div>');
+            arrName.push('</ul>');
           }
         }
 
@@ -324,7 +328,8 @@ document.getElementById('search').addEventListener('click', () => {
               popArrFunc();
               trustCalcFunc(turfArr);
               trustCalcFunc(turfdirtArr);
-              messageFunc();
+              messageFunc(turfArr);
+              messageFunc(turfdirtArr);
               break;
             case 'ダ':
               positionCalcFunc();
@@ -335,7 +340,8 @@ document.getElementById('search').addEventListener('click', () => {
               popArrFunc();
               trustCalcFunc(dirtArr);
               trustCalcFunc(turfdirtArr);
-              messageFunc();
+              messageFunc(dirtArr);
+              messageFunc(turfdirtArr);
               break;
           }
         }
