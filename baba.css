@@ -7,7 +7,7 @@ body {
 }
 #top a {
   padding: 5px;
-  color: black;
+  color: #000;
   display: flex;
   text-decoration: none;
 }
@@ -27,13 +27,17 @@ body {
   padding: 0 15px 20px 15px;
   height: auto;
   width: 800px;
-  background-color: paleturquoise;
+  background-color: #90ee90;
   border-radius: 7px;
 }
 
 #result > p {
   margin: 5px;
   padding: 10px;
+}
+
+.noLoad {
+  display: none;
 }
 
 .oneRaceInfo {

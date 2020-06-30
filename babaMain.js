@@ -7,8 +7,13 @@ const GET_MONTH = ('0' + (GET_NOW.getMonth() + 1)).slice(-2);
 const GET_DAY = GET_NOW.getDate()
 const GET_TODAY = `${GET_YEAR}${GET_MONTH}${GET_DAY}`;
 
+const loadGif = document.getElementById('loadGif');
+
+loadGif.classList.add('noLoad');
+
 //スプレッドシートjson取得
 function callSpread(keibaData) {
+  loadGif.classList.remove('noLoad');
   const callSpread = new XMLHttpRequest();
   callSpread.open('GET', 'https://script.google.com/macros/s/AKfycbwDZSXsZRDzV3-R5_XavC37-LEAohi2tz0Ok48NHtW_R1j6fxtG/exec', true);
   callSpread.responseType = 'json';
@@ -308,6 +313,7 @@ document.getElementById('search').addEventListener('click', () => {
       }
 
       //HTML画面出力
+      loadGif.classList.add('noLoad');
       let choiceField = trend.fieldChoice.value;
       document.getElementById('trendDay').textContent = displayDay;
       document.getElementById('trendField').textContent = displayLocation;
