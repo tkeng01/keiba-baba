@@ -36,6 +36,12 @@ body {
   padding: 10px;
 }
 
+#loadGif {
+  text-align: center;
+  position: relative;
+  top: 40px;
+}
+
 .noLoad {
   display: none;
 }
