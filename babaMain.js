@@ -8,6 +8,7 @@ const GET_DAY = GET_NOW.getDate()
 const GET_TODAY = `${GET_YEAR}${GET_MONTH}${GET_DAY}`;
 
 const loadGif = document.getElementById('loadGif');
+const getResultHtml = document.getElementById('resultHtml');
 
 loadGif.classList.add('noLoad');
 
@@ -395,7 +396,7 @@ document.getElementById('search').addEventListener('click', () => {
           break;
       }
       resultHtml += '</div>';
-      document.getElementById('resultHtml').innerHTML = resultHtml;
+      getResultHtml.innerHTML = resultHtml;
     });
   } else {
     displayCounter = 0;
