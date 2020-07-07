@@ -14,6 +14,10 @@ loadGif.classList.add('noLoad');
 
 //スプレッドシートjson取得
 function callSpread(keibaData) {
+  //2回目の場合に１回目の結果表示を削除
+  if(getResultHtml.childNodes.length == 1) {
+    getResultHtml.classList.add('hideResult');
+  }
   loadGif.classList.remove('noLoad');
   const callSpread = new XMLHttpRequest();
   callSpread.open('GET', 'https://script.google.com/macros/s/AKfycbwDZSXsZRDzV3-R5_XavC37-LEAohi2tz0Ok48NHtW_R1j6fxtG/exec', true);
@@ -397,6 +401,10 @@ document.getElementById('search').addEventListener('click', () => {
       }
       resultHtml += '</div>';
       getResultHtml.innerHTML = resultHtml;
+
+      if(getResultHtml.classList.contains('hideResult')) {
+        getResultHtml.classList.remove('hideResult');
+      }
     });
   } else {
     displayCounter = 0;
