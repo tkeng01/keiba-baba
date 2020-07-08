@@ -9,6 +9,11 @@ const GET_TODAY = `${GET_YEAR}${GET_MONTH}${GET_DAY}`;
 
 const loadGif = document.getElementById('loadGif');
 const getResultHtml = document.getElementById('resultHtml');
+const LOCATION_LENGTH = trend.locationChoice.length;
+const DISTANCE_LENGTH = trend.distanceChoice.length;
+let trendDay = document.getElementById('trendDay');
+let trendField = document.getElementById('trendField'); 
+
 
 loadGif.classList.add('noLoad');
 
@@ -18,6 +23,8 @@ function callSpread(keibaData) {
   if(getResultHtml.childNodes.length == 1) {
     getResultHtml.classList.add('hideResult');
   }
+  trendDay.classList.add('hideResult');
+  trendField.classList.add('hideResult');
   loadGif.classList.remove('noLoad');
   const callSpread = new XMLHttpRequest();
   callSpread.open('GET', 'https://script.google.com/macros/s/AKfycbwDZSXsZRDzV3-R5_XavC37-LEAohi2tz0Ok48NHtW_R1j6fxtG/exec', true);
@@ -47,10 +54,6 @@ function callSpread(keibaData) {
     keibaData(keibaDataArr);
   }
 }
-
-// --input入力値取得--
-const LOCATION_LENGTH = trend.locationChoice.length;
-const DISTANCE_LENGTH = trend.distanceChoice.length;
 
 //検索ボタン処理
 document.getElementById('search').addEventListener('click', () => {
@@ -376,8 +379,8 @@ document.getElementById('search').addEventListener('click', () => {
       //HTML画面出力
       loadGif.classList.add('noLoad');
       let choiceField = trend.fieldChoice.value;
-      document.getElementById('trendDay').textContent = displayDay;
-      document.getElementById('trendField').textContent = displayLocation;
+      trendDay.textContent = displayDay;
+      trendField.textContent = displayLocation;
       let resultHtml = '<div>';
       switch(choiceField) {
         case 'turfdirt':
@@ -401,10 +404,9 @@ document.getElementById('search').addEventListener('click', () => {
       }
       resultHtml += '</div>';
       getResultHtml.innerHTML = resultHtml;
-
-      if(getResultHtml.classList.contains('hideResult')) {
-        getResultHtml.classList.remove('hideResult');
-      }
+      trendDay.classList.remove('hideResult');
+      trendField.classList.remove('hideResult');
+      getResultHtml.classList.remove('hideResult');
     });
   } else {
     displayCounter = 0;
