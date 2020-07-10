@@ -42,7 +42,7 @@ body {
   top: 40px;
 }
 
-.noLoad {
+.noLoad, .hideResult {
   display: none;
 }
 
