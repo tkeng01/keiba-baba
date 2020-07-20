@@ -81,3 +81,11 @@ body {
   margin: -15px;
   list-style: none;
 }
+
+#display > p {
+  display: inline-block;
+}
+
+#display > button {
+  display: inline-block;
+}
