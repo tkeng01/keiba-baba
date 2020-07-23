@@ -139,6 +139,7 @@ document.getElementById('search').addEventListener('click', () => {
       let forwardCounter = 0;
       let medCounter = 0;
       let behindCounter = 0;
+      let raceCount = 0;
 
       //json全データをチェック
       keibaDataArr.forEach((dayLocatValue) => {
@@ -173,7 +174,7 @@ document.getElementById('search').addEventListener('click', () => {
 
       //配列push関数
       function arrPushFunc(arrName) {
-        arrName.push('<div class="oneRaceInfo">' + '<ul class="displayInfo">');
+        arrName.push('<div class="oneRaceInfo">' + '<button class="resultSave" type="button">保存</button>' + '<ul class="displayInfo">');
         arrName.push('<li>' + displayRaceNum + '</li>');
         arrName.push('<li>' + displayClass + '</li>');
         arrName.push('</ul>');
@@ -377,36 +378,78 @@ document.getElementById('search').addEventListener('click', () => {
       }
 
       //HTML画面出力
-      loadGif.classList.add('noLoad');
-      let choiceField = trend.fieldChoice.value;
-      trendDay.textContent = displayDay;
-      trendField.textContent = displayLocation;
-      let resultHtml = '<div>';
-      switch(choiceField) {
-        case 'turfdirt':
-          //全レース
-          turfdirtArr.forEach((turfdirt) => {
-            resultHtml += turfdirt;
-          })
-          break;
-        case 'turf':
-          // 芝レース
-          turfArr.forEach((turf) => {
-            resultHtml += turf;
-          })
-          break;
-        case 'dirt':
-          // ダートレース
-          dirtArr.forEach((dirt) => {
-            resultHtml += dirt;
-          })
-          break;
+      function displayHtml(fn) {
+        loadGif.classList.add('noLoad');
+        let choiceField = trend.fieldChoice.value;
+        trendDay.textContent = displayDay;
+        trendField.textContent = displayLocation;
+        let resultHtml = '<div>';
+        switch(choiceField) {
+          case 'turfdirt':
+            //全レース
+            turfdirtArr.forEach((turfdirt) => {
+              resultHtml += turfdirt;
+            })
+            break;
+          case 'turf':
+            // 芝レース
+            turfArr.forEach((turf) => {
+              resultHtml += turf;
+            })
+            break;
+          case 'dirt':
+            // ダートレース
+            dirtArr.forEach((dirt) => {
+              resultHtml += dirt;
+            })
+            break;
+        }
+        resultHtml += '</div>';
+        getResultHtml.innerHTML = resultHtml;
+        trendDay.classList.remove('hideResult');
+        trendField.classList.remove('hideResult');
+        getResultHtml.classList.remove('hideResult');
+        fn();
       }
-      resultHtml += '</div>';
-      getResultHtml.innerHTML = resultHtml;
-      trendDay.classList.remove('hideResult');
-      trendField.classList.remove('hideResult');
-      getResultHtml.classList.remove('hideResult');
+      displayHtml(function() {
+        const RESULT_SAVE = document.getElementsByClassName('resultSave');
+        RESULT_SAVE[0].addEventListener('click', () => {
+          console.log('1');
+        });
+        RESULT_SAVE[1].addEventListener('click', () => {
+          console.log('2');
+        });
+        RESULT_SAVE[2].addEventListener('click', () => {
+          console.log('3');
+        });
+        RESULT_SAVE[3].addEventListener('click', () => {
+          console.log('4');
+        });
+        RESULT_SAVE[4].addEventListener('click', () => {
+          console.log('5');
+        });
+        RESULT_SAVE[5].addEventListener('click', () => {
+          console.log('6');
+        });
+        RESULT_SAVE[6].addEventListener('click', () => {
+          console.log('7');
+        });
+        RESULT_SAVE[7].addEventListener('click', () => {
+          console.log('8');
+        });
+        RESULT_SAVE[8].addEventListener('click', () => {
+          console.log('9');
+        });
+        RESULT_SAVE[9].addEventListener('click', () => {
+          console.log('10');
+        });
+        RESULT_SAVE[10].addEventListener('click', () => {
+          console.log('11');
+        });
+        RESULT_SAVE[11].addEventListener('click', () => {
+          console.log('12');
+        });
+      });
     });
   } else {
     displayCounter = 0;
