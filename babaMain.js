@@ -171,10 +171,18 @@ document.getElementById('search').addEventListener('click', () => {
         });
       }
 
+        const outputTest = 'TEST';
+        function addElement(content) {
+          var li = $('<li>').text(content);
+          $('#jqTest').prepend(li);
+        }
+        // addElement(displayRaceNum);
+
       //配列push関数
       function arrPushFunc(arrName) {
         arrName.push('<div class="oneRaceInfo">' + '<ul class="displayInfo">');
         arrName.push('<li>' + displayRaceNum + '</li>');
+        arrName.push(addElement(displayRaceNum));
         arrName.push('<li>' + displayClass + '</li>');
         arrName.push('</ul>');
         arrName.push('<ul class="displayInfo">');
