@@ -171,12 +171,23 @@ document.getElementById('search').addEventListener('click', () => {
         });
       }
 
-        const outputTest = 'TEST';
-        function addElement(content) {
-          var li = $('<li>').text(content);
-          $('#jqTest').prepend(li);
-        }
-        // addElement(displayRaceNum);
+      //要素追加関数
+      // function addDivElement() {
+      //   let divElement = $('<div class="oneRaceInfo">');
+      //   $('#jqTest').prepend(divElement);
+      // }
+      // addDivElement();
+
+      // function addUlElement() {
+      //   let ulElement = $('<ul class="displayInfo">');
+      //   $('.oneRaceInfo').after(ulElement);
+      // }
+      // addUlElement();
+
+      // function addLiElement(content) {
+      //   var li = $('<li>').text(content);
+      //   $('#jqTest').prepend(li);
+      // }
 
       //配列push関数
       function arrPushFunc(arrName) {
@@ -420,3 +431,18 @@ document.getElementById('search').addEventListener('click', () => {
     displayCounter = 0;
   }
 });
+
+const CONTENT = 'TEST';
+function addElement(contents) {
+  let addDiv = $('<div class="oneRaceInfo">');
+  let addUl = $('<ul class="displayInfo">');
+  let addLi = $('<li>').text(contents);
+  if(contents == undefined) {
+    $('#jqTest').prepend(addDiv);
+    $('.oneRaceInfo').append(addUl);
+  } else {
+    $('.displayInfo').append(addLi);
+  }
+}
+addElement();
+addElement(CONTENT);
