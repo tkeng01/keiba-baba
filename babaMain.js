@@ -170,30 +170,40 @@ document.getElementById('search').addEventListener('click', () => {
           }
         });
       }
-
-      //要素追加関数
-      // function addDivElement() {
-      //   let divElement = $('<div class="oneRaceInfo">');
-      //   $('#jqTest').prepend(divElement);
-      // }
-      // addDivElement();
-
-      // function addUlElement() {
-      //   let ulElement = $('<ul class="displayInfo">');
-      //   $('.oneRaceInfo').after(ulElement);
-      // }
-      // addUlElement();
-
-      // function addLiElement(content) {
-      //   var li = $('<li>').text(content);
-      //   $('#jqTest').prepend(li);
-      // }
+      
+      //要素追加関数   
+      function addDivElement(domName, className) {
+        let addDiv = $('<div>');
+        $(domName).prepend(addDiv);
+        if(className != undefined) {
+          addDiv.addClass(className);
+        }
+      }
+      
+      function addUlElement(domName, className) {
+        let addUl = $('<ul>');
+        $(domName).prepend(addUl);
+        if(className != undefined) {
+          addUl.addClass(className);
+        }
+      }
+      
+      function addLiElement(domName, className) {
+        let addLi = $('<li>');
+        $(domName).prepend(addLi);
+        if(className != undefined) {
+          addLi.addClass(className);
+        }
+      }
+      
+      addDivElement('#resultHtml', "oneRaceInfo");
+      addUlElement('.oneRaceInfo', "displayInfo");
+      addLiElement('.displayInfo');
 
       //配列push関数
       function arrPushFunc(arrName) {
         arrName.push('<div class="oneRaceInfo">' + '<ul class="displayInfo">');
         arrName.push('<li>' + displayRaceNum + '</li>');
-        arrName.push(addElement(displayRaceNum));
         arrName.push('<li>' + displayClass + '</li>');
         arrName.push('</ul>');
         arrName.push('<ul class="displayInfo">');
@@ -431,18 +441,3 @@ document.getElementById('search').addEventListener('click', () => {
     displayCounter = 0;
   }
 });
-
-const CONTENT = 'TEST';
-function addElement(contents) {
-  let addDiv = $('<div class="oneRaceInfo">');
-  let addUl = $('<ul class="displayInfo">');
-  let addLi = $('<li>').text(contents);
-  if(contents == undefined) {
-    $('#jqTest').prepend(addDiv);
-    $('.oneRaceInfo').append(addUl);
-  } else {
-    $('.displayInfo').append(addLi);
-  }
-}
-addElement();
-addElement(CONTENT);
