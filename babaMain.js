@@ -171,10 +171,10 @@ document.getElementById('search').addEventListener('click', () => {
         });
       }
       
-      //要素追加関数   
+      //要素追加関数
       function addDivElement(domName, className) {
         let addDiv = $('<div>');
-        $(domName).prepend(addDiv);
+        $(domName).append(addDiv);
         if(className != undefined) {
           addDiv.addClass(className);
         }
@@ -182,42 +182,54 @@ document.getElementById('search').addEventListener('click', () => {
       
       function addUlElement(domName, className) {
         let addUl = $('<ul>');
-        $(domName).prepend(addUl);
+        $(domName).append(addUl);
         if(className != undefined) {
           addUl.addClass(className);
         }
       }
       
-      function addLiElement(domName, className) {
-        let addLi = $('<li>');
-        $(domName).prepend(addLi);
+      function addLiElement(domName, varName, className) {
+        let addLi = $('<li>').text(varName)
+        $(domName).append(addLi);
         if(className != undefined) {
           addLi.addClass(className);
         }
       }
-      
-      addDivElement('#resultHtml', "oneRaceInfo");
-      addUlElement('.oneRaceInfo', "displayInfo");
-      addLiElement('.displayInfo');
 
       //配列push関数
       function arrPushFunc(arrName) {
-        arrName.push('<div class="oneRaceInfo">' + '<ul class="displayInfo">');
-        arrName.push('<li>' + displayRaceNum + '</li>');
-        arrName.push('<li>' + displayClass + '</li>');
-        arrName.push('</ul>');
-        arrName.push('<ul class="displayInfo">');
-        arrName.push('<li>' + displayTurf + '</li>');
-        arrName.push('<li>' + displayTotal + '</li>');
-        arrName.push('<li>' + displayDistance + '</li>');
-        arrName.push('<li>' + displayCondition + '</li>');
-        arrName.push('</ul>');
-        arrName.push('<ul class="displayInfo">');
-        arrName.push('<li>' + displayPopular + '</li>');
-        arrName.push('<li>' + displayCorner + '</li>');
-        arrName.push('<li>' + displayPosition + '</li>');
-        arrName.push('</ul>');
+        arrName.push(addDivElement('#resultHtml', "oneRaceInfo"));
+        arrName.push(addUlElement('.oneRaceInfo', "displayInfo"));
+        arrName.push(addLiElement('.displayInfo', displayRaceNum));
+        arrName.push(addUlElement('.oneRaceInfo', "displayInfo"));
+        arrName.push(addLiElement('.displayInfo', displayTurf));
+        arrName.push(addLiElement('.displayInfo', displayTotal));
+        arrName.push(addLiElement('.displayInfo', displayDistance));
+        arrName.push(addLiElement('.displayInfo', displayCondition));
+        arrName.push(addUlElement('.oneRaceInfo', "displayInfo"));
+        arrName.push(addLiElement('.displayInfo', displayPopular));
+        arrName.push(addLiElement('.displayInfo', displayCorner));
+        arrName.push(addLiElement('.displayInfo', displayPosition));
       }
+
+      //予備
+      // function arrPushFunc(arrName) {
+      //   arrName.push('<div class="oneRaceInfo">' + '<ul class="displayInfo">');
+      //   arrName.push('<li>' + displayRaceNum + '</li>');
+      //   arrName.push('<li>' + displayClass + '</li>');
+      //   arrName.push('</ul>');
+      //   arrName.push('<ul class="displayInfo">');
+      //   arrName.push('<li>' + displayTurf + '</li>');
+      //   arrName.push('<li>' + displayTotal + '</li>');
+      //   arrName.push('<li>' + displayDistance + '</li>');
+      //   arrName.push('<li>' + displayCondition + '</li>');
+      //   arrName.push('</ul>');
+      //   arrName.push('<ul class="displayInfo">');
+      //   arrName.push('<li>' + displayPopular + '</li>');
+      //   arrName.push('<li>' + displayCorner + '</li>');
+      //   arrName.push('<li>' + displayPosition + '</li>');
+      //   arrName.push('</ul>');
+      // }
 
       //ペース計算関数
       function paceCalcFunc(arrName) {
@@ -441,3 +453,33 @@ document.getElementById('search').addEventListener('click', () => {
     displayCounter = 0;
   }
 });
+
+// テスト用
+// const TEST = 'TEST';
+// function addDivElement(domName, className) {
+//   let addDiv = $('<div>');
+//   $(domName).append(addDiv);
+//   if(className != undefined) {
+//     addDiv.addClass(className);
+//   }
+// }
+
+// function addUlElement(domName, className) {
+//   let addUl = $('<ul>');
+//   $(domName).append(addUl);
+//   if(className != undefined) {
+//     addUl.addClass(className);
+//   }
+// }
+
+// function addLiElement(domName, varName, className) {
+//   let addLi = $('<li>').text(varName)
+//   $(domName).append(addLi);
+//   if(className != undefined) {
+//     addLi.addClass(className);
+//   }
+// }
+
+// addDivElement('#resultHtml', "oneRaceInfo");
+// addUlElement('.oneRaceInfo', "displayInfo");
+// addLiElement('.displayInfo', TEST);
