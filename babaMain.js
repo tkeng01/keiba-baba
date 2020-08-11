@@ -455,31 +455,45 @@ document.getElementById('search').addEventListener('click', () => {
 });
 
 // テスト用
-// const TEST = 'TEST';
-// function addDivElement(domName, className) {
-//   let addDiv = $('<div>');
-//   $(domName).append(addDiv);
-//   if(className != undefined) {
-//     addDiv.addClass(className);
-//   }
-// }
+const TEST = 'TEST';
+function addDivElement(domName, className) {
+  let addDiv = document.createElement('div');
+  domName.appendChild(addDiv);
+  if(className != undefined) {
+    addDiv.classList.add(className);
+  }
+  fn();
+  return addDiv;
+}
 
-// function addUlElement(domName, className) {
-//   let addUl = $('<ul>');
-//   $(domName).append(addUl);
-//   if(className != undefined) {
-//     addUl.addClass(className);
-//   }
-// }
+function addUlElement(domName, className) {
+  let addUl = document.createElement('ul');
+  document.getElementsByClassName(domName)[0].appendChild(addUl);
+  if(className != undefined) {
+    addUl.classList.add(className);
+  }
+  return addUl;
+}
 
-// function addLiElement(domName, varName, className) {
-//   let addLi = $('<li>').text(varName)
-//   $(domName).append(addLi);
-//   if(className != undefined) {
-//     addLi.addClass(className);
-//   }
-// }
+function addLiElement(domName, varName, className) {
+  let liContent = document.createTextNode(varName);
+  let addLi = document.createElement('li').appendChild(liContent);
+  document.getElementsByClassName(domName)[0].appendChild(addLi);
+  if(className != undefined) {
+    addLi.classList.add(className);
+  }
+  return addLi;
+}
 
-// addDivElement('#resultHtml', "oneRaceInfo");
-// addUlElement('.oneRaceInfo', "displayInfo");
-// addLiElement('.displayInfo', TEST);
+// let testArr = [];
+// testArr.push(addDivElement(resultHtml, "oneRaceInfo"));
+// resultHtml.appendChild(testArr);
+
+addDivElement(resultHtml, "oneRaceInfo");
+addUlElement('oneRaceInfo', "displayInfo");
+// let liContent = document.createTextNode(TEST);
+// let addLi = document.createElement('li').textContent(TEST);
+// let addLi = document.createElement('li').appendChild(liContent);
+// document.getElementsByClassName('displayInfo')[0].appendChild(addLi);
+// document.getElementsByClassName('displayInfo')[0].textContent(TEST);
+// addLiElement('displayInfo', TEST, "aaaa");
