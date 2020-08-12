@@ -465,29 +465,31 @@ function addDivElement(domName, className) {
   return addDiv;
 }
 
-function addUlElement(domName, className) {
+function addUlElement(domName, domLength, className) {
   let addUl = document.createElement('ul');
-  document.getElementsByClassName(domName)[0].appendChild(addUl);
+  document.getElementsByClassName(domName)[domLength].appendChild(addUl);
   if(className != undefined) {
     addUl.classList.add(className);
   }
   return addUl;
 }
 
-function addLiElement(domName, varName, className) {
+function addLiElement(domName, domLength, varName, className) {
   let liContent = document.createTextNode(varName);
   let addLi = document.createElement('li');
-  document.getElementsByClassName(domName)[0].appendChild(addLi).textContent = varName;
+  document.getElementsByClassName(domName)[domLength].appendChild(addLi).textContent = varName;
   if(className != undefined) {
     addLi.classList.add(className);
   }
   return addLi;
 }
 
-// let testArr = [];
-// testArr.push(addDivElement(resultHtml, "oneRaceInfo"));
-// resultHtml.appendChild(testArr);
-
+let oneRaceInfoLength = document.getElementsByClassName("oneRaceInfo").length;
+let displayInfoLength = document.getElementsByClassName("displayInfo").length;
+console.log(oneRaceInfoLength);
+console.log(displayInfoLength);
 addDivElement(resultHtml, "oneRaceInfo");
-addUlElement('oneRaceInfo', "displayInfo");
-addLiElement('displayInfo', TEST);
+addUlElement('oneRaceInfo', 0, "displayInfo");
+addLiElement('displayInfo', 0, TEST);
+console.log(oneRaceInfoLength);
+console.log(displayInfoLength);
