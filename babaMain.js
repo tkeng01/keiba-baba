@@ -462,7 +462,6 @@ function addDivElement(domName, className) {
   if(className != undefined) {
     addDiv.classList.add(className);
   }
-  fn();
   return addDiv;
 }
 
@@ -477,8 +476,8 @@ function addUlElement(domName, className) {
 
 function addLiElement(domName, varName, className) {
   let liContent = document.createTextNode(varName);
-  let addLi = document.createElement('li').appendChild(liContent);
-  document.getElementsByClassName(domName)[0].appendChild(addLi);
+  let addLi = document.createElement('li');
+  document.getElementsByClassName(domName)[0].appendChild(addLi).textContent = varName;
   if(className != undefined) {
     addLi.classList.add(className);
   }
@@ -491,9 +490,4 @@ function addLiElement(domName, varName, className) {
 
 addDivElement(resultHtml, "oneRaceInfo");
 addUlElement('oneRaceInfo', "displayInfo");
-// let liContent = document.createTextNode(TEST);
-// let addLi = document.createElement('li').textContent(TEST);
-// let addLi = document.createElement('li').appendChild(liContent);
-// document.getElementsByClassName('displayInfo')[0].appendChild(addLi);
-// document.getElementsByClassName('displayInfo')[0].textContent(TEST);
-// addLiElement('displayInfo', TEST, "aaaa");
+addLiElement('displayInfo', TEST);
