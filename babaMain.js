@@ -486,10 +486,18 @@ function addLiElement(domName, domLength, varName, className) {
 
 let oneRaceInfoLength = document.getElementsByClassName("oneRaceInfo").length;
 let displayInfoLength = document.getElementsByClassName("displayInfo").length;
+
+function reInfoLength() {
+  oneRaceInfoLength = document.getElementsByClassName("oneRaceInfo").length;
+  displayInfoLength = document.getElementsByClassName("displayInfo").length;
+}
+
+reInfoLength()
 console.log(oneRaceInfoLength);
 console.log(displayInfoLength);
 addDivElement(resultHtml, "oneRaceInfo");
 addUlElement('oneRaceInfo', 0, "displayInfo");
 addLiElement('displayInfo', 0, TEST);
-console.log(oneRaceInfoLength);
-console.log(displayInfoLength);
+reInfoLength()
+console.log(oneRaceInfoLength = oneRaceInfoLength);
+console.log(displayInfoLength = displayInfoLength);
