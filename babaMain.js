@@ -202,30 +202,6 @@ document.getElementById('search').addEventListener('click', () => {
         });
       }
       
-      const TEST = 'TEST';
-      function arrPushFunc(arrName) {
-        arrName.push(addDivElement("resultHtml", "oneRaceInfo"));
-        arrName.push(addUlElement('oneRaceInfo', 0, "displayInfo"));
-        arrName.push(addLiElement('displayInfo', 0, TEST));
-        arrName.push(addLiElement('displayInfo', 0, TEST));
-        arrName.push(addUlElement('oneRaceInfo', 0, "displayInfo"));
-        arrName.push(addLiElement('displayInfo', 1, TEST));
-        arrName.push(addLiElement('displayInfo', 1, TEST));
-        arrName.push(addLiElement('displayInfo', 1, TEST));
-        arrName.push(addLiElement('displayInfo', 1, TEST));
-        arrName.push(addUlElement('oneRaceInfo', 0, "displayInfo"));        
-        arrName.push(addLiElement('displayInfo', 2, TEST));
-        arrName.push(addLiElement('displayInfo', 2, TEST));
-        arrName.push(addLiElement('displayInfo', 2, TEST));
-      }
-
-      let testArr = [];
-      arrPushFunc(testArr)
-      console.log(testArr[0]);
-      console.log(testArr[1]);
-      console.log(testArr[2]);
-      console.log(testArr[3]);
-
       // function arrPushFunc(arrName) {
       //   arrName.push(addDivElement("resultHtml", "oneRaceInfo"));
       //   arrName.push(addUlElement('oneRaceInfo', 0, "displayInfo"));
@@ -242,23 +218,23 @@ document.getElementById('search').addEventListener('click', () => {
       //   arrName.push(addLiElement('displayInfo', 2, displayPosition));
       // }
 
-      // function arrPushFunc(arrName) {
-      //   arrName.push('<div class="oneRaceInfo">' + '<ul class="displayInfo">');
-      //   arrName.push('<li>' + displayRaceNum + '</li>');
-      //   arrName.push('<li>' + displayClass + '</li>');
-      //   arrName.push('</ul>');
-      //   arrName.push('<ul class="displayInfo">');
-      //   arrName.push('<li>' + displayTurf + '</li>');
-      //   arrName.push('<li>' + displayTotal + '</li>');
-      //   arrName.push('<li>' + displayDistance + '</li>');
-      //   arrName.push('<li>' + displayCondition + '</li>');
-      //   arrName.push('</ul>');
-      //   arrName.push('<ul class="displayInfo">');
-      //   arrName.push('<li>' + displayPopular + '</li>');
-      //   arrName.push('<li>' + displayCorner + '</li>');
-      //   arrName.push('<li>' + displayPosition + '</li>');
-      //   arrName.push('</ul>');
-      // }
+      function arrPushFunc(arrName) {
+        arrName.push('<div class="oneRaceInfo">' + '<ul class="displayInfo">');
+        arrName.push('<li>' + displayRaceNum + '</li>');
+        arrName.push('<li>' + displayClass + '</li>');
+        arrName.push('</ul>');
+        arrName.push('<ul class="displayInfo">');
+        arrName.push('<li>' + displayTurf + '</li>');
+        arrName.push('<li>' + displayTotal + '</li>');
+        arrName.push('<li>' + displayDistance + '</li>');
+        arrName.push('<li>' + displayCondition + '</li>');
+        arrName.push('</ul>');
+        arrName.push('<ul class="displayInfo">');
+        arrName.push('<li>' + displayPopular + '</li>');
+        arrName.push('<li>' + displayCorner + '</li>');
+        arrName.push('<li>' + displayPosition + '</li>');
+        arrName.push('</ul>');
+      }
 
       //ペース計算関数
       function paceCalcFunc(arrName) {
@@ -273,6 +249,8 @@ document.getElementById('search').addEventListener('click', () => {
         arrName.push('<li>' + displayPace + '</li>');
         arrName.push('</ul>');
       }
+
+      console.log
 
       function messageFunc(arrName) {
         calcPace = displayPace.substr(0, 1);
@@ -446,78 +424,56 @@ document.getElementById('search').addEventListener('click', () => {
         }
       }
 
-      // //要素追加関数
-      // const TEST = 'TEST';
-      // function addDivElement(domName, className) {
-      //   let addDiv = document.createElement('div');
-      //   document.getElementById(domName).appendChild(addDiv);
-      //   if(className != undefined) {
-      //     addDiv.classList.add(className);
-      //   }
-      //   return addDiv;
-      // }
-      
-      // function addUlElement(domName, domLength, className) {
-      //   let addUl = document.createElement('ul');
-      //   document.getElementsByClassName(domName)[domLength].appendChild(addUl);
-      //   if(className != undefined) {
-      //     addUl.classList.add(className);
-      //   }
-      //   return addUl;
-      // }
-      
-      // function addLiElement(domName, domLength, varName, className) {
-      //   let liContent = document.createTextNode(varName);
-      //   let addLi = document.createElement('li');
-      //   document.getElementsByClassName(domName)[domLength].appendChild(addLi).textContent = varName;
-      //   if(className != undefined) {
-      //     addLi.classList.add(className);
-      //   }
-      //   return addLi;
-      // }
-
-      // addDivElement("resultHtml", "oneRaceInfo");
-      // addUlElement('oneRaceInfo', 0, "displayInfo");
-      // addLiElement('displayInfo', 0, displayRaceNum);
-      // addLiElement('displayInfo', 0, displayClass);
-      // addUlElement('oneRaceInfo', 0, "displayInfo");
-      // addLiElement('displayInfo', 1, displayTurf);
-      // addLiElement('displayInfo', 1, displayTotal);
-      // addLiElement('displayInfo', 1, displayDistance);
-      // addLiElement('displayInfo', 1, displayCondition);
-      // addUlElement('oneRaceInfo', 0, "displayInfo");
-      // addLiElement('displayInfo', 2, displayPopular);
-      // addLiElement('displayInfo', 2, displayCorner);
-      // addLiElement('displayInfo', 2, displayPosition);
-
       //HTML画面出力
       loadGif.classList.add('noLoad');
       let choiceField = trend.fieldChoice.value;
       trendDay.textContent = displayDay;
       trendField.textContent = displayLocation;
-      let resultHtml = '<div>';
-      switch(choiceField) {
-        case 'turfdirt':
-          //全レース
-          turfdirtArr.forEach((turfdirt) => {
-            resultHtml += turfdirt;
-          })
-          break;
-        case 'turf':
-          // 芝レース
-          turfArr.forEach((turf) => {
-            resultHtml += turf;
-          })
-          break;
-        case 'dirt':
-          // ダートレース
-          dirtArr.forEach((dirt) => {
-            resultHtml += dirt;
-          })
-          break;
-      }
-      resultHtml += '</div>';
-      getResultHtml.innerHTML = resultHtml;
+      addDivElement("resultHtml", "oneRaceInfo");
+      addUlElement('oneRaceInfo', 0, "displayInfo");
+      addLiElement('displayInfo', 0, displayRaceNum);
+      addLiElement('displayInfo', 0, displayClass);
+      addUlElement('oneRaceInfo', 0, "displayInfo");
+      addLiElement('displayInfo', 1, displayTurf);
+      addLiElement('displayInfo', 1, displayTotal);
+      addLiElement('displayInfo', 1, displayDistance);
+      addLiElement('displayInfo', 1, displayCondition);
+      addUlElement('oneRaceInfo', 0, "displayInfo");        
+      addLiElement('displayInfo', 2, displayPopular);
+      addLiElement('displayInfo', 2, displayCorner);
+      addLiElement('displayInfo', 2, displayPosition);
+      addUlElement('oneRaceInfo', 0, "displayInfo");
+      addLiElement('displayInfo', 3, displayPace);
+      addUlElement('oneRaceInfo', 0, "displayInfo");
+      addLiElement('displayInfo', 4, '信頼度：');
+      // addLiElement('displayInfo', 4, '信頼度：' + charCheck(charConv(...popArrFunc())));
+      addUlElement('oneRaceInfo', 0, "displayInfoEnd");
+      addLiElement('displayInfoEnd', 0, paceMessage);
+      addLiElement('displayInfoEnd', 0, positionMessage);
+
+      // let resultHtml = '<div>';
+      // switch(choiceField) {
+      //   case 'turfdirt':
+      //     //全レース
+      //     turfdirtArr.forEach((turfdirt) => {
+      //       resultHtml += turfdirt;
+      //     })
+      //     break;
+      //   case 'turf':
+      //     // 芝レース
+      //     turfArr.forEach((turf) => {
+      //       resultHtml += turf;
+      //     })
+      //     break;
+      //   case 'dirt':
+      //     // ダートレース
+      //     dirtArr.forEach((dirt) => {
+      //       resultHtml += dirt;
+      //     })
+      //     break;
+      // }
+      // resultHtml += '</div>';
+      // getResultHtml.innerHTML = resultHtml;
       trendDay.classList.remove('hideResult');
       trendField.classList.remove('hideResult');
       getResultHtml.classList.remove('hideResult');
@@ -526,49 +482,3 @@ document.getElementById('search').addEventListener('click', () => {
     displayCounter = 0;
   }
 });
-
-const TEST = 'TEST';
-function addDivElement(domName, className) {
-  let addDiv = document.createElement('div');
-  document.getElementById(domName).appendChild(addDiv);
-  if(className != undefined) {
-    addDiv.classList.add(className);
-  }
-  return addDiv;
-}
-
-function addUlElement(domName, domLength, className) {
-  let addUl = document.createElement('ul');
-  document.getElementsByClassName(domName)[domLength].appendChild(addUl);
-  if(className != undefined) {
-    addUl.classList.add(className);
-  }
-  return addUl;
-}
-
-function addLiElement(domName, domLength, varName, className) {
-  let liContent = document.createTextNode(varName);
-  let addLi = document.createElement('li');
-  document.getElementsByClassName(domName)[domLength].appendChild(addLi).textContent = varName;
-  if(className != undefined) {
-    addLi.classList.add(className);
-  }
-  return addLi;
-}
-
-// console.log(addDivElement("resultHtml", "oneRaceInfo"));
-// console.log(addUlElement('oneRaceInfo', 0, "displayInfo"));
-// console.log(addLiElement('displayInfo', 0, TEST));
-// console.log(addLiElement('displayInfo', 0, TEST));
-
-// let testArr = [];
-// testArr.push(addDivElement("resultHtml", "oneRaceInfo"));
-// testArr.push(addUlElement('oneRaceInfo', 0, "displayInfo"));
-// testArr.push(addLiElement('displayInfo', 0, TEST));
-// testArr.push(addLiElement('displayInfo', 0, TEST));
-// console.log(testArr[0]);
-
-// addDivElement("resultHtml", "oneRaceInfo");
-// addUlElement('oneRaceInfo', 0, "displayInfo");
-// addLiElement('displayInfo', 0, TEST);
-// addLiElement('displayInfo', 0, TEST);
