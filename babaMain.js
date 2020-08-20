@@ -157,35 +157,6 @@ document.getElementById('search').addEventListener('click', () => {
         }
       });
 
-      //要素追加関数
-      function addDivElement(domName, className) {
-        let addDiv = document.createElement('div');
-        document.getElementById(domName).appendChild(addDiv);
-        if(className != undefined) {
-          addDiv.classList.add(className);
-        }
-        return addDiv;
-      }
-      
-      function addUlElement(domName, domLength, className) {
-        let addUl = document.createElement('ul');
-        document.getElementsByClassName(domName)[domLength].appendChild(addUl);
-        if(className != undefined) {
-          addUl.classList.add(className);
-        }
-        return addUl;
-      }
-      
-      function addLiElement(domName, domLength, varName, className) {
-        let liContent = document.createTextNode(varName);
-        let addLi = document.createElement('li');
-        document.getElementsByClassName(domName)[domLength].appendChild(addLi).textContent = varName;
-        if(className != undefined) {
-          addLi.classList.add(className);
-        }
-        return addLi;
-      }
-
       //位置取り計算関数
       function positionCalcFunc() {
         displayPosition = '位置取り：';
@@ -201,23 +172,12 @@ document.getElementById('search').addEventListener('click', () => {
           }
         });
       }
-      
-      // function arrPushFunc(arrName) {
-      //   arrName.push(addDivElement("resultHtml", "oneRaceInfo"));
-      //   arrName.push(addUlElement('oneRaceInfo', 0, "displayInfo"));
-      //   arrName.push(addLiElement('displayInfo', 0, displayRaceNum));
-      //   arrName.push(addLiElement('displayInfo', 0, displayClass));
-      //   arrName.push(addUlElement('oneRaceInfo', 0, "displayInfo"));
-      //   arrName.push(addLiElement('displayInfo', 1, displayTurf));
-      //   arrName.push(addLiElement('displayInfo', 1, displayTotal));
-      //   arrName.push(addLiElement('displayInfo', 1, displayDistance));
-      //   arrName.push(addLiElement('displayInfo', 1, displayCondition));
-      //   arrName.push(addUlElement('oneRaceInfo', 0, "displayInfo"));        
-      //   arrName.push(addLiElement('displayInfo', 2, displayPopular));
-      //   arrName.push(addLiElement('displayInfo', 2, displayCorner));
-      //   arrName.push(addLiElement('displayInfo', 2, displayPosition));
-      // }
 
+      // 要素追加関数
+      function addElement(elementType,className) {
+         '<' + elementType + 'class=' + className + '>';
+      }
+      
       function arrPushFunc(arrName) {
         arrName.push('<div class="oneRaceInfo">' + '<ul class="displayInfo">');
         arrName.push('<li>' + displayRaceNum + '</li>');
@@ -429,51 +389,29 @@ document.getElementById('search').addEventListener('click', () => {
       let choiceField = trend.fieldChoice.value;
       trendDay.textContent = displayDay;
       trendField.textContent = displayLocation;
-      addDivElement("resultHtml", "oneRaceInfo");
-      addUlElement('oneRaceInfo', 0, "displayInfo");
-      addLiElement('displayInfo', 0, displayRaceNum);
-      addLiElement('displayInfo', 0, displayClass);
-      addUlElement('oneRaceInfo', 0, "displayInfo");
-      addLiElement('displayInfo', 1, displayTurf);
-      addLiElement('displayInfo', 1, displayTotal);
-      addLiElement('displayInfo', 1, displayDistance);
-      addLiElement('displayInfo', 1, displayCondition);
-      addUlElement('oneRaceInfo', 0, "displayInfo");        
-      addLiElement('displayInfo', 2, displayPopular);
-      addLiElement('displayInfo', 2, displayCorner);
-      addLiElement('displayInfo', 2, displayPosition);
-      addUlElement('oneRaceInfo', 0, "displayInfo");
-      addLiElement('displayInfo', 3, displayPace);
-      addUlElement('oneRaceInfo', 0, "displayInfo");
-      addLiElement('displayInfo', 4, '信頼度：');
-      // addLiElement('displayInfo', 4, '信頼度：' + charCheck(charConv(...popArrFunc())));
-      addUlElement('oneRaceInfo', 0, "displayInfoEnd");
-      addLiElement('displayInfoEnd', 0, paceMessage);
-      addLiElement('displayInfoEnd', 0, positionMessage);
-
-      // let resultHtml = '<div>';
-      // switch(choiceField) {
-      //   case 'turfdirt':
-      //     //全レース
-      //     turfdirtArr.forEach((turfdirt) => {
-      //       resultHtml += turfdirt;
-      //     })
-      //     break;
-      //   case 'turf':
-      //     // 芝レース
-      //     turfArr.forEach((turf) => {
-      //       resultHtml += turf;
-      //     })
-      //     break;
-      //   case 'dirt':
-      //     // ダートレース
-      //     dirtArr.forEach((dirt) => {
-      //       resultHtml += dirt;
-      //     })
-      //     break;
-      // }
-      // resultHtml += '</div>';
-      // getResultHtml.innerHTML = resultHtml;
+      let resultHtml = '<div>';
+      switch(choiceField) {
+        case 'turfdirt':
+          //全レース
+          turfdirtArr.forEach((turfdirt) => {
+            resultHtml += turfdirt;
+          })
+          break;
+        case 'turf':
+          // 芝レース
+          turfArr.forEach((turf) => {
+            resultHtml += turf;
+          })
+          break;
+        case 'dirt':
+          // ダートレース
+          dirtArr.forEach((dirt) => {
+            resultHtml += dirt;
+          })
+          break;
+      }
+      resultHtml += '</div>';
+      getResultHtml.innerHTML = resultHtml;
       trendDay.classList.remove('hideResult');
       trendField.classList.remove('hideResult');
       getResultHtml.classList.remove('hideResult');
@@ -482,3 +420,61 @@ document.getElementById('search').addEventListener('click', () => {
     displayCounter = 0;
   }
 });
+
+function addElement(elementType, className, contents) {
+  let createElement = `<${elementType} class="${className}">` + contents + `</${elementType}>`;
+  return createElement;
+}
+console.log(addElement('div', "test", 'aaaaaaaa'));
+
+// --------廃止--------
+//要素追加関数
+// function addDivElement(domName, className) {
+//   let addDiv = document.createElement('div');
+//   document.getElementById(domName).appendChild(addDiv);
+//   if(className != undefined) {
+//     addDiv.classList.add(className);
+//   }
+//   return addDiv;
+// }
+
+// function addUlElement(domName, domLength, className) {
+//   let addUl = document.createElement('ul');
+//   document.getElementsByClassName(domName)[domLength].appendChild(addUl);
+//   if(className != undefined) {
+//     addUl.classList.add(className);
+//   }
+//   return addUl;
+// }
+
+// function addLiElement(domName, domLength, varName, className) {
+//   let liContent = document.createTextNode(varName);
+//   let addLi = document.createElement('li');
+//   document.getElementsByClassName(domName)[domLength].appendChild(addLi).textContent = varName;
+//   if(className != undefined) {
+//     addLi.classList.add(className);
+//   }
+//   return addLi;
+// }
+
+// addDivElement("resultHtml", "oneRaceInfo");
+// addUlElement('oneRaceInfo', 0, "displayInfo");
+// addLiElement('displayInfo', 0, displayRaceNum);
+// addLiElement('displayInfo', 0, displayClass);
+// addUlElement('oneRaceInfo', 0, "displayInfo");
+// addLiElement('displayInfo', 1, displayTurf);
+// addLiElement('displayInfo', 1, displayTotal);
+// addLiElement('displayInfo', 1, displayDistance);
+// addLiElement('displayInfo', 1, displayCondition);
+// addUlElement('oneRaceInfo', 0, "displayInfo");        
+// addLiElement('displayInfo', 2, displayPopular);
+// addLiElement('displayInfo', 2, displayCorner);
+// addLiElement('displayInfo', 2, displayPosition);
+// addUlElement('oneRaceInfo', 0, "displayInfo");
+// addLiElement('displayInfo', 3, displayPace);
+// addUlElement('oneRaceInfo', 0, "displayInfo");
+// addLiElement('displayInfo', 4, '信頼度：');
+// addUlElement('oneRaceInfo', 0, "displayInfoEnd");
+// addLiElement('displayInfoEnd', 0, paceMessage);
+// addLiElement('displayInfoEnd', 0, positionMessage);
+// -------------------
