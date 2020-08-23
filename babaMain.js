@@ -141,6 +141,7 @@ document.getElementById('search').addEventListener('click', () => {
       let behindCounter = 0;
       let oneRaceInfoLength = document.getElementsByClassName("oneRaceInfo").length;
       let displayInfoLength = document.getElementsByClassName("displayInfo").length;
+      let noData = 0;
 
       //json全データをチェック
       keibaDataArr.forEach((dayLocatValue) => {
@@ -152,7 +153,9 @@ document.getElementById('search').addEventListener('click', () => {
           eventCounter ++;
           if(eventCounter == keibaDataArr.length) {
             alert(displayDay + 'でのデータは見つかりませんでした');
+            resultHtml += '<p>' + '開催日ではありません' + '<p>';
             breakCheck = 1;
+            noData = 1;
           }
         }
       });
@@ -373,37 +376,43 @@ document.getElementById('search').addEventListener('click', () => {
             // 該当データが無い場合の処理
             dataNullCounter ++;
             if(dataNullCounter == splitRaceDate.length) {
+              loadGif.classList.add('noLoad');
               alert('検索条件に該当するデータが見つかりませんでした');
+              resultHtml += '<p>' + 'データが見つかりませんでした' + '</p>'
+              noData = 1;
             }
           }
         }
       }
 
-      //HTML画面出力
+      //結果HTML画面出力
       loadGif.classList.add('noLoad');
       let choiceField = trend.fieldChoice.value;
       trendDay.textContent = displayDay;
       trendField.textContent = displayLocation;
       let resultHtml = '<div>';
-      switch(choiceField) {
-        case 'turfdirt':
-          //全レース
-          turfdirtArr.forEach((turfdirt) => {
-            resultHtml += turfdirt;
-          })
-          break;
-        case 'turf':
-          // 芝レース
-          turfArr.forEach((turf) => {
-            resultHtml += turf;
-          })
-          break;
-        case 'dirt':
-          // ダートレース
-          dirtArr.forEach((dirt) => {
-            resultHtml += dirt;
-          })
-          break;
+      if(noData == 0) {
+        resultHtml;
+        switch(choiceField) {
+          case 'turfdirt':
+            //全レース
+            turfdirtArr.forEach((turfdirt) => {
+              resultHtml += turfdirt;
+            })
+            break;
+          case 'turf':
+            // 芝レース
+            turfArr.forEach((turf) => {
+              resultHtml += turf;
+            })
+            break;
+          case 'dirt':
+            // ダートレース
+            dirtArr.forEach((dirt) => {
+              resultHtml += dirt;
+            })
+            break;
+        }
       }
       resultHtml += '</div>';
       getResultHtml.innerHTML = resultHtml;
