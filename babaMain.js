@@ -142,6 +142,7 @@ document.getElementById('search').addEventListener('click', () => {
       let oneRaceInfoLength = document.getElementsByClassName("oneRaceInfo").length;
       let displayInfoLength = document.getElementsByClassName("displayInfo").length;
       let noData = 0;
+      let resultHtml = '<div>';
 
       //json全データをチェック
       keibaDataArr.forEach((dayLocatValue) => {
@@ -390,7 +391,7 @@ document.getElementById('search').addEventListener('click', () => {
       let choiceField = trend.fieldChoice.value;
       trendDay.textContent = displayDay;
       trendField.textContent = displayLocation;
-      let resultHtml = '<div>';
+      resultHtml;
       if(noData == 0) {
         resultHtml;
         switch(choiceField) {
