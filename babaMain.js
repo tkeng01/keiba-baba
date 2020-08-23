@@ -173,11 +173,6 @@ document.getElementById('search').addEventListener('click', () => {
         });
       }
 
-      // 要素追加関数
-      function addElement(elementType,className) {
-         '<' + elementType + 'class=' + className + '>';
-      }
-      
       function arrPushFunc(arrName) {
         arrName.push('<div class="oneRaceInfo">' + '<ul class="displayInfo">');
         arrName.push('<li>' + displayRaceNum + '</li>');
@@ -421,14 +416,14 @@ document.getElementById('search').addEventListener('click', () => {
   }
 });
 
-function addElement(elementType, className, contents) {
-  let createElement = `<${elementType} class="${className}">` + contents + `</${elementType}>`;
-  return createElement;
-}
-console.log(addElement('div', "test", 'aaaaaaaa'));
-
 // --------廃止--------
 //要素追加関数
+// function addElement(elementType, className, contents) {
+//   let createElement = `<${elementType} class="${className}">` + contents + `</${elementType}>`;
+//   return createElement;
+// }
+// console.log(addElement('div', "test", 'aaaaaaaa'));
+
 // function addDivElement(domName, className) {
 //   let addDiv = document.createElement('div');
 //   document.getElementById(domName).appendChild(addDiv);
