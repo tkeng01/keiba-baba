@@ -139,6 +139,8 @@ document.getElementById('search').addEventListener('click', () => {
       let forwardCounter = 0;
       let medCounter = 0;
       let behindCounter = 0;
+      let oneRaceInfoLength = document.getElementsByClassName("oneRaceInfo").length;
+      let displayInfoLength = document.getElementsByClassName("displayInfo").length;
 
       //json全データをチェック
       keibaDataArr.forEach((dayLocatValue) => {
@@ -171,7 +173,6 @@ document.getElementById('search').addEventListener('click', () => {
         });
       }
 
-      //配列push関数
       function arrPushFunc(arrName) {
         arrName.push('<div class="oneRaceInfo">' + '<ul class="displayInfo">');
         arrName.push('<li>' + displayRaceNum + '</li>');
@@ -203,6 +204,8 @@ document.getElementById('search').addEventListener('click', () => {
         arrName.push('<li>' + displayPace + '</li>');
         arrName.push('</ul>');
       }
+
+      console.log
 
       function messageFunc(arrName) {
         calcPace = displayPace.substr(0, 1);
@@ -412,3 +415,61 @@ document.getElementById('search').addEventListener('click', () => {
     displayCounter = 0;
   }
 });
+
+// --------廃止--------
+//要素追加関数
+// function addElement(elementType, className, contents) {
+//   let createElement = `<${elementType} class="${className}">` + contents + `</${elementType}>`;
+//   return createElement;
+// }
+// console.log(addElement('div', "test", 'aaaaaaaa'));
+
+// function addDivElement(domName, className) {
+//   let addDiv = document.createElement('div');
+//   document.getElementById(domName).appendChild(addDiv);
+//   if(className != undefined) {
+//     addDiv.classList.add(className);
+//   }
+//   return addDiv;
+// }
+
+// function addUlElement(domName, domLength, className) {
+//   let addUl = document.createElement('ul');
+//   document.getElementsByClassName(domName)[domLength].appendChild(addUl);
+//   if(className != undefined) {
+//     addUl.classList.add(className);
+//   }
+//   return addUl;
+// }
+
+// function addLiElement(domName, domLength, varName, className) {
+//   let liContent = document.createTextNode(varName);
+//   let addLi = document.createElement('li');
+//   document.getElementsByClassName(domName)[domLength].appendChild(addLi).textContent = varName;
+//   if(className != undefined) {
+//     addLi.classList.add(className);
+//   }
+//   return addLi;
+// }
+
+// addDivElement("resultHtml", "oneRaceInfo");
+// addUlElement('oneRaceInfo', 0, "displayInfo");
+// addLiElement('displayInfo', 0, displayRaceNum);
+// addLiElement('displayInfo', 0, displayClass);
+// addUlElement('oneRaceInfo', 0, "displayInfo");
+// addLiElement('displayInfo', 1, displayTurf);
+// addLiElement('displayInfo', 1, displayTotal);
+// addLiElement('displayInfo', 1, displayDistance);
+// addLiElement('displayInfo', 1, displayCondition);
+// addUlElement('oneRaceInfo', 0, "displayInfo");        
+// addLiElement('displayInfo', 2, displayPopular);
+// addLiElement('displayInfo', 2, displayCorner);
+// addLiElement('displayInfo', 2, displayPosition);
+// addUlElement('oneRaceInfo', 0, "displayInfo");
+// addLiElement('displayInfo', 3, displayPace);
+// addUlElement('oneRaceInfo', 0, "displayInfo");
+// addLiElement('displayInfo', 4, '信頼度：');
+// addUlElement('oneRaceInfo', 0, "displayInfoEnd");
+// addLiElement('displayInfoEnd', 0, paceMessage);
+// addLiElement('displayInfoEnd', 0, positionMessage);
+// -------------------
